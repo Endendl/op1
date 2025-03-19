@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\shader">
+      <UniqueIdentifier>{1387f394-8642-40ae-bde5-ffd09eed0446}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\gameobjct">
+      <UniqueIdentifier>{f0eb73ee-3553-4441-b6d1-f2435fbec33a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\mount">
+      <UniqueIdentifier>{fec30e85-e82b-4b12-ac3e-eed8441ca5b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\多线程">
+      <UniqueIdentifier>{1a002a23-1b54-4904-8b0a-682bf7a10de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\tool">
+      <UniqueIdentifier>{ce2a1b4c-3996-47d4-b8eb-c52efc411e06}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="op1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\glad4.6\src\glad.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="opengls.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="buildwindow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="init_openl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="init_tool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="openglx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="w3jx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="optime.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="otime.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="firstobj.h">
+      <Filter>头文件\gameobjct</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>头文件\gameobjct</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>头文件\gameobjct</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl_shader.h">
+      <Filter>头文件\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkNode.h">
+      <Filter>头文件\gameobjct</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>头文件\gameobjct</Filter>
+    </ClInclude>
+    <ClInclude Include="mounting.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_lige.h">
+      <Filter>头文件\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_litcube.h">
+      <Filter>头文件\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="fstobjupdate.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+    <ClInclude Include="IncludeGameobjct.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IncludeMount.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Pthread.h">
+      <Filter>头文件\多线程</Filter>
+    </ClInclude>
+    <ClInclude Include="collision.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeCollision.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereCollision.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>头文件\tool</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_a.h">
+      <Filter>头文件\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="CapsuleCollision.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+    <ClInclude Include="animation.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+    <ClInclude Include="animator.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp_glm_helpers.h">
+      <Filter>头文件\tool</Filter>
+    </ClInclude>
+    <ClInclude Include="bone.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+    <ClInclude Include="animdata.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="light.h">
+      <Filter>头文件\gameobjct</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatorController.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+    <ClInclude Include="testAnimatorController.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+    <ClInclude Include="animatorC.h">
+      <Filter>头文件\mount</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="vs.vert">
+      <Filter>头文件\shader</Filter>
+    </None>
+    <None Include="fs.frag">
+      <Filter>头文件\shader</Filter>
+    </None>
+    <None Include="packages.config" />
+    <None Include="shader\litevs.vert" />
+    <None Include="shader\litcube00.frag" />
+    <None Include="shader\litcube00.vert" />
+    <None Include="shader\litefs.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="container.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="awesomeface.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="..\x64\Debug\container2.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="container2_specular.png">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
