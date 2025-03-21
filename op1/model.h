@@ -38,6 +38,7 @@ public:
 			Drawmountinglist[i]->Draw();
 			//std::cout << Drawmountinglist[i]->name;
 		}
+		//thisshader->setBool("play", false);
 	};
 	auto& GetBoneInfoMap() { return m_BoneInfoMap; }
 	int& GetBoneCount() { return m_BoneCounter; }

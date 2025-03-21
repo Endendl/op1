@@ -25,8 +25,8 @@ public:
 	bool setTexCoords = true;
 	bool setTangent = false;
 	bool setBitangent = false;
-	bool setm_BoneIDs = false;
-	bool setm_Weights = false;
+	bool setm_BoneIDs = true;
+	bool setm_Weights = true;
 	opengl_shader* mesh_shader;
 	struct Texture
 	{
@@ -96,6 +96,7 @@ public:
         glBindVertexArray(0);
 
 		glActiveTexture(GL_TEXTURE0);
+		
 	};
 	mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures) {
 		this->vertices = vertices;
@@ -184,6 +185,7 @@ private:
 		}
 		// ids
 		if (setm_BoneIDs) {
+			//std::cout << "setm_BoneIDs" << std::endl;
 			glEnableVertexAttribArray(5);
 			//glVertexAttribIPointer(5, 4, GL_INT, Vertexsize, (void*)offsetof(Vertex, m_BoneIDs));
 			glVertexAttribIPointer(5, 4, GL_INT, Vertexsize, (void*)Vertexsizecontinue);
@@ -192,6 +194,7 @@ private:
 		}
 		// weights
 		if (setm_Weights) {
+			//std::cout << "setm_Weights" << std::endl;
 			glEnableVertexAttribArray(6);
 			//glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, Vertexsize, (void*)offsetof(Vertex, m_Weights));
 			glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, Vertexsize, (void*)Vertexsizecontinue);

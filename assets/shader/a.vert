@@ -1,5 +1,4 @@
 #version 330 core
-
 // 输入顶点属性
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec3 aNormal;
@@ -60,7 +59,11 @@ void main()
 
     // 变换到裁剪空间
     gl_Position = projection * view * model * totalPosition;
+    if (gl_VertexID == 0) { // 仅打印第一个顶点的数据
+        
+    }
 
     // 传递纹理坐标
     TexCoords = aTexCoords;
 }
+

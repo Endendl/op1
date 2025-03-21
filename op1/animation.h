@@ -36,6 +36,12 @@ public:
 		
 		ReadHierarchyData(m_RootNode, scene->mRootNode);// 读取骨骼层级结构
 		ReadMissingBones(animation, *_model);// 读取动画中的骨骼数据，并与模型中的骨骼信息进行匹配
+
+		std::string tmppath = animationPath;
+		// 找到最后一个反斜杠的位置
+		size_t lastSlashPos = tmppath.find_last_of("\\");
+		// 提取文件名
+		name = tmppath.substr(0, (tmppath.find_last_of("."))).substr(lastSlashPos + 1);
 	}
 
 	~animation()
@@ -54,7 +60,7 @@ public:
 		else return &(*iter);
 	}
 
-
+	std::string name; // 节点名称
 	inline float GetTicksPerSecond() { return m_TicksPerSecond; }//返回动画的帧率
 	inline float GetDuration() { return m_Duration; }//返回动画的总持续时间
 	inline const AssimpNodeData& GetRootNode() { return m_RootNode; }//返回骨骼层级结构的根节点。

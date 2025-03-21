@@ -19,7 +19,7 @@ public:
 		m_FinalBoneMatrices.reserve(100);
 
 		for (int i = 0; i < 100; i++)
-			m_FinalBoneMatrices.push_back(glm::mat4(1.0f));
+			m_FinalBoneMatrices.push_back(glm::mat4(1.0f));//多了100个骨头
 	}
 
 	virtual void setint(std::string _type, int mod) {}
@@ -30,6 +30,7 @@ public:
 		m_DeltaTime = dt;
 		if (m_CurrentAnimation)
 		{
+			//std::cout << "UpdateAnimation" << std::endl;
 			m_CurrentTime += m_CurrentAnimation->GetTicksPerSecond() * dt;
 			m_CurrentTime = fmod(m_CurrentTime, m_CurrentAnimation->GetDuration());
 			CalculateBoneTransform(&m_CurrentAnimation->GetRootNode(), glm::mat4(1.0f));
@@ -38,6 +39,7 @@ public:
 
 	void PlayAnimation(animation* pAnimation)
 	{
+		std::cout << "PlayAnimation" << std::endl;
 		m_CurrentAnimation = pAnimation;
 		m_CurrentTime = 0.0f;
 	}
@@ -63,6 +65,14 @@ public:
 			int index = boneInfoMap[nodeName].id;
 			glm::mat4 offset = boneInfoMap[nodeName].offset;
 			m_FinalBoneMatrices[index] = globalTransformation * offset;
+
+			//std::cout << "Bone: " << nodeName << ", Index: " << index << "\n";
+			//std::cout << "Global Transformation:\n";
+			//PrintMatrix(globalTransformation);
+			//std::cout << "Offset:\n";
+			//PrintMatrix(offset);
+			//std::cout << "Final Bone Matrix:\n";
+			//PrintMatrix(m_FinalBoneMatrices[index]);	
 		}
 
 		for (int i = 0; i < node->childrenCount; i++)
@@ -73,11 +83,32 @@ public:
 	{
 		return m_FinalBoneMatrices;
 	}
-	void Draw() override {
-		//if (playing) {
-		//	loadupdate();
-		//}
+
+
+	void PrintMatrix(const glm::mat4& matrix)//测试打印矩阵
+	{
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				std::cout << matrix[i][j] << " ";
+			}
+			std::cout << "\n";
+		}
 	}
+
+	void update() override {
+		std::cout << "animator update\n";
+	}
+
+	//void Draw() override {
+	//	std::cout << "animatorC Draw\n";
+	//	if (m_CurrentAnimation) {
+	//		std::cout << "animatorC rady\n";
+	//		if (playing) {
+	//			std::cout << "animatorC play\n";
+	//			loadupdate();
+	//		}
+	//	}
+	//}
 	void loadupdate() {//灌入
 		std::vector<glm::mat4> transforms = GetFinalBoneMatrices();
 		for (int i = 0; i < transforms.size(); ++i) {
@@ -89,6 +120,7 @@ public:
 	void addanimation(animation _animation) {//加入动画到内部
 		animationlist.push_back(new animation(_animation));
 		m_CurrentAnimation = animationlist.back();
+		PlayAnimation(m_CurrentAnimation);
 	}
 
 	std::vector<animation*> animationlist;
@@ -98,5 +130,5 @@ public:
 	float m_DeltaTime;
 	bool playing = false;
 };
-std::vector<animator> animatorlist;
+std::vector<animator*> animatorlist;
 

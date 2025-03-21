@@ -88,6 +88,11 @@ void openginit() {
 	glEnable(GL_STENCIL_TEST);//模板测试开启
 };
 GameObject* thisis;
+
+
+model* objss;
+animator* animast;
+
 void in1t() {
 	//着色器添加
 	shaderlist.push_back(new shader_a("a", std::string(PATH + "\\assets\\shader\\a.vert").c_str(), std::string(PATH + "\\assets\\shader\\a.frag").c_str()));
@@ -104,36 +109,43 @@ void in1t() {
 	DObjctadd(new camera(glm::vec3(0.0f, 0.0f, -3.0f), 0.0f, 90.0f, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f)));
 	maincar = static_cast<camera*>(linknode->backDOBJECT);
 	DObjctadd(new model(PATH + "\\assets\\model\\backpack\\backpack.obj"));
-	linknode->backDOBJECT->thisshader = shaderlist[1];
+	linknode->backDOBJECT->thisshader = shaderlist[0];
 	add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
 
 	DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\liandao.obj"));
-	linknode->backDOBJECT->thisshader = shaderlist[1];
+	linknode->backDOBJECT->thisshader = shaderlist[0];
 	DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\liandao.obj"));
-	linknode->backDOBJECT->thisshader = shaderlist[1];
+	linknode->backDOBJECT->thisshader = shaderlist[0];
 	add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
 
 	thisis = linknode->backDOBJECT;
 	DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\nanosuit.obj"));
-	linknode->backDOBJECT->thisshader = shaderlist[1];
+	linknode->backDOBJECT->thisshader = shaderlist[0];
 	add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
 
 
 	DObjctadd(new model(PATH + "\\assets\\model\\45\\45.dae"));
 	std::string path = PATH + "\\assets\\model\\45\\45.dae";
 	linknode->backDOBJECT->thisshader = shaderlist[0];
-	linknode->backDOBJECT->transform.Position = glm::vec3(10.0f, -6.0f, 0.0f);
+	linknode->backDOBJECT->transform.Position = glm::vec3(0.0f, 0.0f, 0.0f);
 	linknode->backDOBJECT->transform.rotate = glm::vec3(0.0f, 0.0f, 0.0f);
-	linknode->backDOBJECT->transform.Scale = glm::vec3(0.05f, 0.05f, 0.05f);
+	linknode->backDOBJECT->transform.Scale = glm::vec3(1.0f, 1.0f, 1.0f);
 
-	model* objss = dynamic_cast<model*>(linknode->backDOBJECT);
-	//animationslist.push_back(animation(path, objss));//加入动画进动画机
-	//addtestAnimatorController(objss, new testAnimatorCcontroller());//创建动画控制器和动画机
+	 objss = dynamic_cast<model*>(linknode->backDOBJECT);
+	animationslist.push_back(animation(path, objss));//加入动画进动画机
+	animatorlist.push_back(new animatorC());
+	animast = animatorlist.back();
+	animast->gameobjct = objss;
+	animast->addanimation(animationslist.back());
+	addtestAnimatorController(objss, new testAnimatorCcontroller(animast));//创建动画控制器和动画机
+	
+	std::cout <<"size" << animast->animationlist.size();
 	//animator* animorss= dynamic_cast<animator*>(objss->Drawmountinglist[0]);//获取动画机
 	//animorss->addanimation(animationslist[0]);//动画机插入动画
 
-	if(objss->Drawmountinglist[0] == NULL)
-	std::cout << "objss->Drawmountinglist[0]->name";
+	//if(objss->Drawmountinglist[0] == NULL)
+	//std::cout << "objss->Drawmountinglist[0]->name";
+	//std::cout << animationslist.back().name << std::endl;
 	//std::cout << objss->Drawmountinglist[0]->name;
 	
 	//dynamic_cast<testAnimatorCcontroller*>(objss->Drawmountinglist[0])->addanimator(objss, );
@@ -145,6 +157,16 @@ void in1t() {
 
 	Lightlist.addlight(light::Directional, "lightdir", glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(-45.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 	Lightlist.addlight(light::Spot, "lights", glm::vec3(0.0f, 2.0f, 1.0f), glm::vec3(-45.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+
+
+
+	if (PthreadStart) {
+		for (int i = 0; i < 4; ++i) {
+			pt.push_back(std::make_unique<Pthread>(i));
+		}
+	}
+
+
 }
 bool lihtflag = false;
 bool lihtflag2 = false;
@@ -155,7 +177,7 @@ void runupdate(){//主线程
 	GameObject* obj = &stobj;
 	int num = 0;
 	std::cout << std::endl;
-	while (0) {
+	while (1) {
 		std::cout << "编号：" << num << " 物体名称：" << obj->name << std::endl;
 		std::cout << "子物体队列-" << " 数量：" << obj->Children.size() << "{" << std::endl;
 		for (int i = 0; i < obj->Children.size(); i++)
@@ -185,17 +207,40 @@ void runupdate(){//主线程
 
 	while (!glfwWindowShouldClose(window->window))
 	{
+		optime.update();
 		while (objp->mode) {
 			OBJCT1 = objp->getobj();
 			OBJCT1->Pupdate();
 		}
+		animast->UpdateAnimation(optime.getdeltaTime());
+		std::vector<glm::mat4> transforms = animast->GetFinalBoneMatrices();
+		for (int i = 0; i < transforms.size(); ++i) {
+			shaderlist[0]->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
+			std::cout << transforms.size() << std::endl;
+			//shaderlist[0]->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
+
+
+			shaderlist[0]->setBool("play", true);
+			if (i == 0) {
+			std::cout << "finalBonesMatrices[" + std::to_string(i) + "]" << std::endl;
+			animast->PrintMatrix(transforms[i]);
+
+			}
+			//std::cout << "finalBonesMatrices[" + std::to_string(i) + "]" << std::endl;
+			//for (int i2 = 0; i2 < 4; i2++) {
+			//	for (int i3 = 0; i3 < 4; i2++) {
+			//		std::cout << transforms[i][i2][i3]<< " ";
+			//	}
+			//	std::cout << "\n";
+			//}
+
+		}
+
 		// 等待所有子线程完成一次循环
-		if (Pends >= m) {
+		//if (Pends >= m) {
 			//Input->updatend();//停止更新
 
-			for (int i = 0; i < m; i++) {
-				sem_main.acquire();
-			}
+			sem_main_acquire();
 			// 绘制对象
 			while (objp->mode == 0) {
 				OBJCT1 = objp->getobj();
@@ -210,11 +255,9 @@ void runupdate(){//主线程
 
 			glfwSwapBuffers(window->window);
 			glfwPollEvents();
-			for (int i = 0; i < m; ++i) {
-				sem_thread.release();
-			}
+			sem_thread_release();
 			
-		}
+		//}
 	
 	}
 }
@@ -224,10 +267,7 @@ int rend() {
 	bool lihtflag2 = false;
 	//Pthread ba(1);
 	//创建子线程
-	for (int i = 0; i < 4; ++i) {
-		pt.push_back(std::make_unique<Pthread>(i));
-	}
-
+	
 
 	runupdate();
 

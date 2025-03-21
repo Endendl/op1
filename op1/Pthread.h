@@ -3,6 +3,8 @@
 #include <thread>
 #include <mutex>
 const int m = 4;//线程数
+
+bool PthreadStart = true;
 std::counting_semaphore<m> sem_thread(0); // 用于阻塞子线程
 std::counting_semaphore<m> sem_main(0);   // 用于阻塞主线程
 std::atomic<int> Pends = 0;
@@ -91,3 +93,20 @@ public:
 
 int ptsum;
 std::vector<std::unique_ptr<Pthread>> pt;
+
+void sem_main_acquire() {
+	if (PthreadStart) {
+		for (int i = 0; i < m; i++) {
+			sem_main.acquire();
+		}
+	}
+}
+
+void sem_thread_release() {
+	if (PthreadStart) {
+		for (int i = 0; i < m; ++i) {
+			sem_thread.release();
+		}
+	}
+	
+}
