@@ -89,14 +89,14 @@ void openginit() {
 	glEnable(GL_STENCIL_TEST);//模板测试开启
 
 #pragma region imgui init
-	//IMGUI_CHECKVERSION();
-	//ImGui::CreateContext(NULL);
-	//ImGuiIO& io = ImGui::GetIO();
-	//(void)io;
-	//ImGui::StyleColorsDark();//黑色主题
-	//ImGui_ImplGlfw_InitForOpenGL(window->window, true);
-	//ImGui_ImplOpenGL3_Init("#version 330");
 
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO();
+	(void)io;
+	ImGui::StyleColorsDark();//黑色主题
+	ImGui_ImplGlfw_InitForOpenGL(window->window, true);
+	ImGui_ImplOpenGL3_Init("#version 330");
 
 };
 GameObject* thisis;
@@ -218,28 +218,6 @@ void runupdate(){//主线程
 			OBJCT1 = objp->getobj();
 			OBJCT1->Pupdate();
 		}
-		//animast->UpdateAnimation(optime.getdeltaTime());
-		//std::vector<glm::mat4> transforms = animast->GetFinalBoneMatrices();
-		//for (int i = 0; i < transforms.size(); ++i) {
-		//	shaderlist[0]->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
-		//	//std::cout << transforms.size() << std::endl;
-		//	//shaderlist[0]->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
-		//	shaderlist[0]->setBool("play", true);
-		//	if (i == 0) {
-		//	//std::cout << "finalBonesMatrices[" + std::to_string(i) + "]" << std::endl;
-		//	//animast->PrintMatrix(transforms[i]);
-		//
-		//	}
-		//	//std::cout << "finalBonesMatrices[" + std::to_string(i) + "]" << std::endl;
-		//	//for (int i2 = 0; i2 < 4; i2++) {
-		//	//	for (int i3 = 0; i3 < 4; i2++) {
-		//	//		std::cout << transforms[i][i2][i3]<< " ";
-		//	//	}
-		//	//	std::cout << "\n";
-		//	//}
-		//
-		//}
-
 		// 等待所有子线程完成一次循环
 		//if (Pends >= m) {
 			//Input->updatend();//停止更新
@@ -255,7 +233,6 @@ void runupdate(){//主线程
 			Pends = 0;
 			objp->mode = 1;
 			Input->updatend();
-
 			
 			glfwSwapBuffers(window->window);
 			glfwPollEvents();
@@ -275,6 +252,9 @@ int rend() {
 
 	runupdate();
 	
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
 	shaderlistdel();
 	glfwTerminate();
 	return 0;
