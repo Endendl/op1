@@ -76,7 +76,7 @@ private:
 		// 获取模型中的骨骼信息映射和骨骼计数器
 		auto& boneInfoMap = _model.GetBoneInfoMap();
 		int& boneCount = _model.GetBoneCount(); 
-
+		//std::cout << " anim " << _model.GetBoneCount();
 		
 		for (int i = 0; i < size; i++)
 		{ // 遍历动画中的骨骼数据

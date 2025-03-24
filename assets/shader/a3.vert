@@ -1,4 +1,5 @@
 #version 330 core
+
 // 输入顶点属性
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec3 aNormal;
@@ -28,30 +29,34 @@ uniform bool play;
 
 void main()
 {
+    // 初始化顶点位置和法线
     vec4 totalPosition = vec4(aPos, 1.0f); // 默认使用原始顶点位置
     vec3 totalNormal = aNormal;            // 默认使用原始法线
 
     // 如果播放动画，则应用骨骼变换
     if (play) {
-        totalPosition = vec4(0.0f);
-        totalNormal = vec3(0.0f);
+        mat4 boneTransform = mat4(0.0f); // 初始化骨骼变换矩阵
+
+        // 计算骨骼变换矩阵
         for (int i = 0; i < MAX_BONE_INFLUENCE; i++) {
-            if (am_BoneIDs[i] == -1) 
-                continue;
+            if (am_BoneIDs[i] == -1 || am_Weights[i] == 0.0) {
+                continue; // 跳过无效的骨骼 ID 或权重为 0 的情况
+            }
             if (am_BoneIDs[i] >= MAX_BONES) {
+                // 骨骼 ID 超出范围，使用原始顶点位置和法线
                 totalPosition = vec4(aPos, 1.0f);
                 totalNormal = aNormal;
                 break;
             }
-            // 变换顶点位置
-            vec4 localPosition = finalBonesMatrices[am_BoneIDs[i]] * vec4(aPos, 1.0f);
-            totalPosition += localPosition * am_Weights[i];
-
-            // 变换法线
-            vec3 localNormal = mat3(finalBonesMatrices[am_BoneIDs[i]]) * aNormal;
-            totalNormal += localNormal * am_Weights[i];
+            // 累加骨骼变换矩阵
+            boneTransform += finalBonesMatrices[am_BoneIDs[i]] * am_Weights[i];
         }
+
+        // 应用骨骼变换到顶点位置和法线
+        totalPosition = boneTransform * totalPosition;
+        totalNormal = mat3(boneTransform) * totalNormal;
     }
+
     // 变换到世界空间
     FragPos = vec3(model * totalPosition);
     Normal = mat3(transpose(inverse(model))) * normalize(totalNormal); // 归一化并变换到世界空间
@@ -62,4 +67,3 @@ void main()
     // 传递纹理坐标
     TexCoords = aTexCoords;
 }
-

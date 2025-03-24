@@ -17,7 +17,7 @@ public:
 		
     }
 
-    void Draw(opengl_shader& shader) override {
+    void Draw() override {
 		if (Input->getkey("esc")) {
 			glfwSetWindowShouldClose(window->window, true);
 			return;

@@ -18,7 +18,6 @@ using std::shared_ptr;
 using std::make_shared;
 buildwindow* window;
 #include "light.h"
-
 #include "camera.h"
 
 #include "shader_lige.h"
@@ -43,8 +42,9 @@ buildwindow* window;
 #include "SphereCollision.h"
 #include "CapsuleCollision.h"
 #include "CubeCollision.h"
-
-#include "ImGui/imgui.h"
+#include "imgui_ui.h"
+//#include "imgui_ui.h"
+//#include "ImGui/imgui.h"
 //buildwindow* window2;
 const char* windowname = "opengl";
 const char* windowname2 = "opengl2";
@@ -75,6 +75,7 @@ void openginit() {
 
 	//window2 = new buildwindow(wwidth, wheight, windowname2, objos);
 	glfwMakeContextCurrent(window->window);
+	//glfwSwapInterval(1); // 启用垂直同步
 	//glfwMakeContextCurrent(window2->window);
 
 	//glfwSetFramebufferSizeCallback(window2->window, framebuffer_size_callback);
@@ -86,6 +87,17 @@ void openginit() {
 	Input = &(window->input);
 	glEnable(GL_DEPTH_TEST);//深度缓冲开启
 	glEnable(GL_STENCIL_TEST);//模板测试开启
+
+#pragma region imgui init
+	//IMGUI_CHECKVERSION();
+	//ImGui::CreateContext(NULL);
+	//ImGuiIO& io = ImGui::GetIO();
+	//(void)io;
+	//ImGui::StyleColorsDark();//黑色主题
+	//ImGui_ImplGlfw_InitForOpenGL(window->window, true);
+	//ImGui_ImplOpenGL3_Init("#version 330");
+
+
 };
 GameObject* thisis;
 
@@ -95,7 +107,7 @@ animator* animast;
 
 void in1t() {
 	//着色器添加
-	shaderlist.push_back(new shader_a("a", std::string(PATH + "\\assets\\shader\\a.vert").c_str(), std::string(PATH + "\\assets\\shader\\a.frag").c_str()));
+	shaderlist.push_back(new shader_a("a", std::string(PATH + "\\assets\\shader\\a3.vert").c_str(), std::string(PATH + "\\assets\\shader\\a.frag").c_str()));
 	shaderlist.push_back(new shader_lige("lite", std::string(PATH + "\\assets\\shader\\litevs.vert").c_str(), std::string(PATH + "\\assets\\shader\\litefs.frag").c_str()));
 	shaderlist.push_back(new shader_litcube("litcube", std::string(PATH + "\\assets\\shader\\litcube00.vert").c_str(), std::string(PATH + "\\assets\\shader\\litcube00.frag").c_str()));
 	//物体存活链表
@@ -106,18 +118,21 @@ void in1t() {
 		linknode->backDOBJECT = &stobj;
 	}
 	stobj.mountingadd(new fstobjupdate());
+	//DObjctadd(new camera(glm::vec3(0.0f, 0.0f, -3.0f), 0.0f, 90.0f, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f)));
 	DObjctadd(new camera(glm::vec3(0.0f, 0.0f, -3.0f), 0.0f, 90.0f, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f)));
 	maincar = static_cast<camera*>(linknode->backDOBJECT);
 	DObjctadd(new model(PATH + "\\assets\\model\\backpack\\backpack.obj"));
 	linknode->backDOBJECT->thisshader = shaderlist[0];
 	add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
-
+	
+	
 	DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\liandao.obj"));
 	linknode->backDOBJECT->thisshader = shaderlist[0];
+
 	DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\liandao.obj"));
 	linknode->backDOBJECT->thisshader = shaderlist[0];
 	add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
-
+	
 	thisis = linknode->backDOBJECT;
 	DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\nanosuit.obj"));
 	linknode->backDOBJECT->thisshader = shaderlist[0];
@@ -129,9 +144,10 @@ void in1t() {
 	linknode->backDOBJECT->thisshader = shaderlist[0];
 	linknode->backDOBJECT->transform.Position = glm::vec3(0.0f, 0.0f, 0.0f);
 	linknode->backDOBJECT->transform.rotate = glm::vec3(0.0f, 0.0f, 0.0f);
-	linknode->backDOBJECT->transform.Scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	linknode->backDOBJECT->transform.Scale = glm::vec3(0.020f, 0.020f, 0.020f);
 
-	 objss = dynamic_cast<model*>(linknode->backDOBJECT);
+	objss = dynamic_cast<model*>(linknode->backDOBJECT);
+	//std::cout <<" obj " << objss->GetBoneCount();
 	animationslist.push_back(animation(path, objss));//加入动画进动画机
 	animatorlist.push_back(new animatorC());
 	animast = animatorlist.back();
@@ -139,18 +155,8 @@ void in1t() {
 	animast->addanimation(animationslist.back());
 	addtestAnimatorController(objss, new testAnimatorCcontroller(animast));//创建动画控制器和动画机
 	
-	std::cout <<"size" << animast->animationlist.size();
-	//animator* animorss= dynamic_cast<animator*>(objss->Drawmountinglist[0]);//获取动画机
-	//animorss->addanimation(animationslist[0]);//动画机插入动画
-
-	//if(objss->Drawmountinglist[0] == NULL)
-	//std::cout << "objss->Drawmountinglist[0]->name";
-	//std::cout << animationslist.back().name << std::endl;
-	//std::cout << objss->Drawmountinglist[0]->name;
+	//std::cout << "name" << animationslist.back().name;
 	
-	//dynamic_cast<testAnimatorCcontroller*>(objss->Drawmountinglist[0])->addanimator(objss, );
-	
-	//linknode->backDOBJECT->thisshader = shaderlist[0];
 
 	//shader
 	
@@ -212,29 +218,27 @@ void runupdate(){//主线程
 			OBJCT1 = objp->getobj();
 			OBJCT1->Pupdate();
 		}
-		animast->UpdateAnimation(optime.getdeltaTime());
-		std::vector<glm::mat4> transforms = animast->GetFinalBoneMatrices();
-		for (int i = 0; i < transforms.size(); ++i) {
-			shaderlist[0]->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
-			std::cout << transforms.size() << std::endl;
-			//shaderlist[0]->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
-
-
-			shaderlist[0]->setBool("play", true);
-			if (i == 0) {
-			std::cout << "finalBonesMatrices[" + std::to_string(i) + "]" << std::endl;
-			animast->PrintMatrix(transforms[i]);
-
-			}
-			//std::cout << "finalBonesMatrices[" + std::to_string(i) + "]" << std::endl;
-			//for (int i2 = 0; i2 < 4; i2++) {
-			//	for (int i3 = 0; i3 < 4; i2++) {
-			//		std::cout << transforms[i][i2][i3]<< " ";
-			//	}
-			//	std::cout << "\n";
-			//}
-
-		}
+		//animast->UpdateAnimation(optime.getdeltaTime());
+		//std::vector<glm::mat4> transforms = animast->GetFinalBoneMatrices();
+		//for (int i = 0; i < transforms.size(); ++i) {
+		//	shaderlist[0]->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
+		//	//std::cout << transforms.size() << std::endl;
+		//	//shaderlist[0]->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
+		//	shaderlist[0]->setBool("play", true);
+		//	if (i == 0) {
+		//	//std::cout << "finalBonesMatrices[" + std::to_string(i) + "]" << std::endl;
+		//	//animast->PrintMatrix(transforms[i]);
+		//
+		//	}
+		//	//std::cout << "finalBonesMatrices[" + std::to_string(i) + "]" << std::endl;
+		//	//for (int i2 = 0; i2 < 4; i2++) {
+		//	//	for (int i3 = 0; i3 < 4; i2++) {
+		//	//		std::cout << transforms[i][i2][i3]<< " ";
+		//	//	}
+		//	//	std::cout << "\n";
+		//	//}
+		//
+		//}
 
 		// 等待所有子线程完成一次循环
 		//if (Pends >= m) {
@@ -244,7 +248,7 @@ void runupdate(){//主线程
 			// 绘制对象
 			while (objp->mode == 0) {
 				OBJCT1 = objp->getobj();
-				OBJCT1->Draw(*shaderlist[0]);
+				OBJCT1->Draw();
 				//std::cout << "1";
 				
 			}
@@ -252,7 +256,7 @@ void runupdate(){//主线程
 			objp->mode = 1;
 			Input->updatend();
 
-
+			
 			glfwSwapBuffers(window->window);
 			glfwPollEvents();
 			sem_thread_release();
@@ -270,15 +274,6 @@ int rend() {
 	
 
 	runupdate();
-
-	//for (int i = 0; i < pt.size(); i++) {
-	//	pt[i].reset(); // 销毁线程对象
-	//}
-	//pt.clear();
-	//for (size_t i = 0; i < pt.size(); i++)
-	//{
-	//	pt[i]->~Pthread();
-	//}
 	
 	shaderlistdel();
 	glfwTerminate();

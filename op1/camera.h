@@ -105,9 +105,9 @@ public:
 			Position += cameraSpeed * Forward;
 		if (Input->getkey("s"))
 			Position -= cameraSpeed * Forward;
-		Yaw += Input->getaix("Mouse X");
+		Yaw += Input->getaix("Mouse X") * optime.getdeltaTime() * 100;
 		//std::cout << "\tcarx£º" << Input->getaix("Mouse X");
-		Pitch -= Input->getaix("Mouse Y");
+		Pitch -= Input->getaix("Mouse Y") * optime.getdeltaTime() * 100;
 
 		if (Input->getkey("a"))
 			Position -= glm::normalize(glm::cross(Forward, Up)) * cameraSpeed;

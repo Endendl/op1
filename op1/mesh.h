@@ -28,6 +28,11 @@ public:
 	bool setm_BoneIDs = true;
 	bool setm_Weights = true;
 	opengl_shader* mesh_shader;
+
+
+	int debugindex = 0;
+
+
 	struct Texture
 	{
 		float shininess;
@@ -185,6 +190,16 @@ private:
 		}
 		// ids
 		if (setm_BoneIDs) {
+			//for (int i = 0; i < vertices.size(); i++) {
+			//	
+			//	if (1) {
+			//		for (size_t i2 = 0; i2 < 4; i2++)
+			//		{
+			//			std::cout << " game" << "setm_BoneIDs " << i << "=" << vertices[i].m_BoneIDs[i2];
+			//		}
+			//		std::cout << std::endl;
+			//	}
+			//}
 			//std::cout << "setm_BoneIDs" << std::endl;
 			glEnableVertexAttribArray(5);
 			//glVertexAttribIPointer(5, 4, GL_INT, Vertexsize, (void*)offsetof(Vertex, m_BoneIDs));
@@ -230,14 +245,15 @@ public:
 		//}
 	};
 
-	
+	std::map<std::string, BoneInfo> m_BoneInfoMap; 
+	int m_BoneCounter = 0;
 
 private:
 	std::vector<mesh::Texture> textures_loaded;//我们希望将纹理的路径与储存在textures_loaded这个vector中的所有纹理进行比较，看看当前纹理的路径是否与其中的一个相同。如果是的话，则跳过纹理加载/生成的部分，直接使用定位到的纹理结构体为网格的纹理。更新后的函数如下：
 	//std::vector<mesh> meshes;
 	std::string directory;
-	std::map<std::string, BoneInfo> m_BoneInfoMap; //
-	int m_BoneCounter = 0;
+	
+	
 
 	void SetVertexBoneDataToDefault(mesh::Vertex& _vertex)
 	{
@@ -256,18 +272,20 @@ private:
 			{
 				_vertex.m_Weights[i] = _weight; // 设置权重
 				_vertex.m_BoneIDs[i] = _boneID; // 设置骨骼 ID
+				//std::cout << "bid" << _boneID << " ";
+				//std::cout << "wet" << _weight << " ";
 				break; // 完成设置，退出循环
 			}
 		}
 	}
 
-	void ExtractBoneWeightForVertices(std::vector<mesh::Vertex>& vertices, aiMesh* mesh, const aiScene* scene)//骨骼信息的提取和顶点权重的设置
+	void ExtractBoneWeightForVertices(std::vector<mesh::Vertex>& vertices, aiMesh* _mesh, const aiScene* scene)//骨骼信息的提取和顶点权重的设置
 	{
-		for (int boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex)
+		for (int boneIndex = 0; boneIndex < _mesh->mNumBones; ++boneIndex)
 		{
 			int boneID = -1;
-			std::string boneName = mesh->mBones[boneIndex]->mName.C_Str();
-
+			std::string boneName = _mesh->mBones[boneIndex]->mName.C_Str();
+			
 			// 检查骨骼是否已经存在于 BoneInfoMap 中
 			if (m_BoneInfoMap.find(boneName) == m_BoneInfoMap.end())
 			{
@@ -275,7 +293,7 @@ private:
 				BoneInfo newBoneInfo;
 				newBoneInfo.id = m_BoneCounter;
 				newBoneInfo.offset = AssimpGLMHelpers::ConvertMatrixToGLMFormat(
-					mesh->mBones[boneIndex]->mOffsetMatrix);
+					_mesh->mBones[boneIndex]->mOffsetMatrix);
 				m_BoneInfoMap[boneName] = newBoneInfo;
 				boneID = m_BoneCounter;
 				m_BoneCounter++;
@@ -288,10 +306,13 @@ private:
 
 			// 确保 boneID 有效
 			assert(boneID != -1);
+			if (boneID == -1) {
+				std::cout << "-1;";
+			}
 
 			// 获取骨骼的权重信息
-			auto weights = mesh->mBones[boneIndex]->mWeights;
-			int numWeights = mesh->mBones[boneIndex]->mNumWeights;
+			auto weights = _mesh->mBones[boneIndex]->mWeights;
+			int numWeights = _mesh->mBones[boneIndex]->mNumWeights;
 
 			// 遍历权重信息，应用到对应的顶点
 			for (int weightIndex = 0; weightIndex < numWeights; ++weightIndex)
@@ -420,10 +441,12 @@ private:
 		// 4. height maps
 		std::vector<mesh::Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
 		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+
+		ExtractBoneWeightForVertices(vertices, _mesh, scene);
+
 		mesh tempmesh(vertices, indices, textures, setPosition, setNormal, setTexCoords, setTangent, setBitangent, setm_BoneIDs, setm_Weights);
 		tempmesh.gameobjct = gameobjct;
 
-		ExtractBoneWeightForVertices(vertices, _mesh, scene);
 
 		return tempmesh;
 		//return mesh::mesh(vertices, indices, textures, 1, 1, 1, setTangent, setBitangent);
@@ -462,6 +485,8 @@ private:
 
 	unsigned int TextureFromFile(const char* path, const std::string& directory)
 	{
+
+		//stbi_set_flip_vertically_on_load(true);
 		std::string filename = std::string(path);
 
 		filename = directory + '\\' + filename;

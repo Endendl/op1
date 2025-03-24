@@ -30,9 +30,11 @@ void main()
 {
     vec4 totalPosition = vec4(aPos, 1.0f); // 默认使用原始顶点位置
     vec3 totalNormal = aNormal;            // 默认使用原始法线
-
+    mat4 boneTransform = mat4(1.0f);
     // 如果播放动画，则应用骨骼变换
     if (play) {
+        //if (play && am_BoneIDs[0] != -1 && am_BoneIDs[1] != -1 && am_BoneIDs[2] != -1 && am_BoneIDs[3] != -1) {
+        boneTransform = mat4(0.0f);
         totalPosition = vec4(0.0f);
         totalNormal = vec3(0.0f);
         for (int i = 0; i < MAX_BONE_INFLUENCE; i++) {
@@ -43,22 +45,27 @@ void main()
                 totalNormal = aNormal;
                 break;
             }
-            // 变换顶点位置
-            vec4 localPosition = finalBonesMatrices[am_BoneIDs[i]] * vec4(aPos, 1.0f);
-            totalPosition += localPosition * am_Weights[i];
+            boneTransform += finalBonesMatrices[am_BoneIDs[i]] * am_Weights[i];//没+过
 
-            // 变换法线
-            vec3 localNormal = mat3(finalBonesMatrices[am_BoneIDs[i]]) * aNormal;
-            totalNormal += localNormal * am_Weights[i];
         }
+        // 将顶点位置转换到世界空间（应用骨骼变换）
+        totalPosition = boneTransform * vec4(aPos, 1.0);
+        FragPos = vec3(model * totalPosition);
+    
+        // 将法线转换到世界空间（应用骨骼变换）
+        totalNormal = vec3(boneTransform * vec4(aNormal, 0.0));
+        Normal = mat3(transpose(inverse(model))) * totalNormal;
+
+    }else{
+        // 变换到世界空间
+        FragPos = vec3(model * totalPosition);
+        Normal = mat3(transpose(inverse(model))) * normalize(totalNormal); // 归一化并变换到世界空间
     }
-    // 变换到世界空间
-    FragPos = vec3(model * totalPosition);
-    Normal = mat3(transpose(inverse(model))) * normalize(totalNormal); // 归一化并变换到世界空间
+
+    
 
     // 变换到裁剪空间
     gl_Position = projection * view * model * totalPosition;
-
     // 传递纹理坐标
     TexCoords = aTexCoords;
 }

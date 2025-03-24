@@ -47,6 +47,7 @@ public:
 	Pthread(int _Species) {//创建，输入队列头部
 		
 		Species = _Species;
+		Pend = true;
 		t = new std::thread(&Pthread::run, this, 1, Species);
 	}
 
@@ -57,6 +58,7 @@ public:
 	Pthread& operator=(Pthread&&) = delete;
 
 	~Pthread() {
+		Pend = false;
 		if (t->joinable()) {
 			t->join();
 		}
@@ -65,7 +67,7 @@ public:
 
 
 	void run(int is, int Species) {
-		while (true)
+		while (Pend)
 		{
 			while (objp->mode) {
 				obj = objp->getobj();

@@ -155,6 +155,9 @@
     <ClInclude Include="animatorC.h">
       <Filter>头文件\mount</Filter>
     </ClInclude>
+    <ClInclude Include="imgui_ui.h">
+      <Filter>头文件\gameobjct</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vs.vert">

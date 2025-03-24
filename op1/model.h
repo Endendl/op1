@@ -16,7 +16,11 @@ public:
 		transform.Position = glm::vec3(2, 2, 10);
 		transform.rotate = glm::vec3(45.0f, 0, 0);
 		transform.Scale = glm::vec3(1, 1.0f, 1);
-		meshlist(this, _path);//载入模型
+		meshlist tmpmesh(this, _path);
+		m_BoneInfoMap = tmpmesh.m_BoneInfoMap;
+		m_BoneCounter = tmpmesh.m_BoneCounter;
+		//std::cout<< " model " << GetBoneCount();
+		//meshlist(this, _path);//载入模型
 		//mountingadd(new );
 		//loadmodel(_path);
 		std::string tmppath = _path;
@@ -31,14 +35,14 @@ public:
 	void update() override { 
 
 	}
-	void Draw(opengl_shader& shader) override {
+	void Draw() override {
 		//std::cout <<  name << Drawmountinglist.size() << " :";
 		for (int i = 0; i < Drawmountinglist.size(); i++)
 		{
 			Drawmountinglist[i]->Draw();
 			//std::cout << Drawmountinglist[i]->name;
 		}
-		//thisshader->setBool("play", false);
+		thisshader->setBool("play", false);
 	};
 	auto& GetBoneInfoMap() { return m_BoneInfoMap; }
 	int& GetBoneCount() { return m_BoneCounter; }

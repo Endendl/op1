@@ -14,7 +14,7 @@ public:
         //Input->updatend();//Í£Ö¹¸üĞÂ
 
     }
-	void Draw(opengl_shader& shader) override {
+	void Draw() override {
         //for (shaderlist i = 0; i < length; i++)
         //{
         //

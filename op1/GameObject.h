@@ -39,12 +39,13 @@ public:
 	virtual void update() {//自定义更新方法
 
 	}
-	void Draw() {//自定义渲染方法 Darmmountinglist存入mesh和动画控制器
+	virtual void Draw() {//自定义渲染方法 Darmmountinglist存入mesh和动画控制器
+		Draws();
 		for (int i = 0; i < Drawmountinglist.size(); i++) {
 			Drawmountinglist[i]->Draw();
 		}
 	}
-	virtual void Draw(opengl_shader& shader) {};
+	virtual void Draws() {};
 	void mountingadd(mounting *_mounting) {
 		mountinglist.push_back(_mounting);
 		mountinglist.back()->gameobjct = this;

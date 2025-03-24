@@ -159,6 +159,7 @@
     <ClInclude Include="firstobj.h" />
     <ClInclude Include="fstobjupdate.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="imgui_ui.h" />
     <ClInclude Include="IncludeGameobjct.h" />
     <ClInclude Include="IncludeMount.h" />
     <ClInclude Include="init_openl.h" />

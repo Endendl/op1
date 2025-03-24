@@ -111,7 +111,9 @@ public:
 	//}
 	void loadupdate() {//π‡»Î
 		std::vector<glm::mat4> transforms = GetFinalBoneMatrices();
+		
 		for (int i = 0; i < transforms.size(); ++i) {
+			//PrintMatrix(transforms[i]);
 			shaderlist[0]->use();
 			shaderlist[0]->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
 			shaderlist[0]->setBool("play", true);
