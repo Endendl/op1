@@ -14,6 +14,12 @@ public:
         //for (int i = 0; i < mountinglist.size(); i++) {
         //    mountinglist[i]->update();
         //}
+		if (Input->getkey("u")) {
+			setmousemode(0);
+		}else
+		if (Input->getkey("y")) {
+			setmousemode(2);
+		}
 		
     }
 
@@ -25,6 +31,7 @@ public:
 		//processInput(window2->window);
 		glfwMakeContextCurrent(window->window);//linshi
 		//背景色
+
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);//GL_DEPTH_BUFFER_BIT来清除深度缓冲 色彩 | 深度缓冲 | 模板
 		glDepthFunc(GL_LESS);//深度缓冲类型
@@ -35,7 +42,15 @@ public:
 		{
 			shaderlist[i]->shaderload();
 		}
+		//imguistart();
+		//ImGui_ImplOpenGL3_NewFrame();
+		//ImGui_ImplGlfw_NewFrame();
+		//ImGui::NewFrame();
+		
+		
 
+		//glfwPollEvents();
+		//std::cout << "gui初始化帧";
 		
     }
 

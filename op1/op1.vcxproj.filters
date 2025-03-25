@@ -28,6 +28,12 @@
     <Filter Include="头文件\tool">
       <UniqueIdentifier>{ce2a1b4c-3996-47d4-b8eb-c52efc411e06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\gameobjct\ui">
+      <UniqueIdentifier>{a756c8c2-9f19-4750-abbe-fad65db42b29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{4fb0b40e-243c-4951-afc1-5fb3ea9b2ffb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="op1.cpp">
@@ -78,12 +84,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="shader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="optime.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="otime.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
@@ -176,27 +176,6 @@
     <ClInclude Include="animatorC.h">
       <Filter>头文件\mount</Filter>
     </ClInclude>
-    <ClInclude Include="imgui_ui.h">
-      <Filter>头文件\gameobjct</Filter>
-    </ClInclude>
-    <ClInclude Include="ImGui\imconfig.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ImGui\imgui.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ImGui\imgui_impl_glfw.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ImGui\imgui_impl_opengl3.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ImGui\imgui_impl_opengl3_loader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="ImGui\imgui_internal.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="ImGui\imstb_rectpack.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -205,6 +184,39 @@
     </ClInclude>
     <ClInclude Include="ImGui\imstb_truetype.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_GameObjct_list.h">
+      <Filter>头文件\gameobjct\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_glfw.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_opengl3.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_opengl3_loader.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="optime.h">
+      <Filter>头文件\tool</Filter>
+    </ClInclude>
+    <ClInclude Include="otime.h">
+      <Filter>头文件\tool</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_objmounts_list.h">
+      <Filter>头文件\gameobjct\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_ui.h">
+      <Filter>头文件\gameobjct\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

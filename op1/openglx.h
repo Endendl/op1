@@ -16,7 +16,7 @@ int wheight;
 #include "GameObject.h"
 using std::shared_ptr;
 using std::make_shared;
-buildwindow* window;
+
 #include "light.h"
 #include "camera.h"
 
@@ -43,6 +43,8 @@ buildwindow* window;
 #include "CapsuleCollision.h"
 #include "CubeCollision.h"
 #include "imgui_ui.h"
+#include "ui_GameObjct_list.h"
+#include "ui_objmounts_list.h"
 //#include "imgui_ui.h"
 //#include "ImGui/imgui.h"
 //buildwindow* window2;
@@ -59,6 +61,7 @@ int processInput(GLFWwindow* window)
 	return 0;
 }
 void openginit() {
+
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
@@ -119,12 +122,14 @@ void in1t() {
 	}
 	stobj.mountingadd(new fstobjupdate());
 	//DObjctadd(new camera(glm::vec3(0.0f, 0.0f, -3.0f), 0.0f, 90.0f, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f)));
+	//DObjctadd(new imgui_ui());
+	DObjctadd(new ui_GameObjct_list());
+	DObjctadd(new ui_objmounts_list());
 	DObjctadd(new camera(glm::vec3(0.0f, 0.0f, -3.0f), 0.0f, 90.0f, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f)));
 	maincar = static_cast<camera*>(linknode->backDOBJECT);
 	DObjctadd(new model(PATH + "\\assets\\model\\backpack\\backpack.obj"));
 	linknode->backDOBJECT->thisshader = shaderlist[0];
 	add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
-	
 	
 	DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\liandao.obj"));
 	linknode->backDOBJECT->thisshader = shaderlist[0];
@@ -137,7 +142,6 @@ void in1t() {
 	DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\nanosuit.obj"));
 	linknode->backDOBJECT->thisshader = shaderlist[0];
 	add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
-
 
 	DObjctadd(new model(PATH + "\\assets\\model\\45\\45.dae"));
 	std::string path = PATH + "\\assets\\model\\45\\45.dae";
@@ -156,10 +160,8 @@ void in1t() {
 	addtestAnimatorController(objss, new testAnimatorCcontroller(animast));//创建动画控制器和动画机
 	
 	//std::cout << "name" << animationslist.back().name;
-	
 
 	//shader
-	
 
 	Lightlist.addlight(light::Directional, "lightdir", glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(-45.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 	Lightlist.addlight(light::Spot, "lights", glm::vec3(0.0f, 2.0f, 1.0f), glm::vec3(-45.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f));
@@ -213,6 +215,7 @@ void runupdate(){//主线程
 
 	while (!glfwWindowShouldClose(window->window))
 	{
+		
 		optime.update();
 		while (objp->mode) {
 			OBJCT1 = objp->getobj();
@@ -223,17 +226,29 @@ void runupdate(){//主线程
 			//Input->updatend();//停止更新
 
 			sem_main_acquire();
+			imguistart();
+			/*ImGui_ImplOpenGL3_NewFrame();
+			ImGui_ImplGlfw_NewFrame();
+			ImGui::NewFrame();*/
+
 			// 绘制对象
 			while (objp->mode == 0) {
 				OBJCT1 = objp->getobj();
 				OBJCT1->Draw();
+				//std::cout << OBJCT1->name;
 				//std::cout << "1";
 				
 			}
+			//ImGui::End();
+
 			Pends = 0;
 			objp->mode = 1;
 			Input->updatend();
-			
+
+			imguiend();
+
+			//ImGui::Render();    // imgui 结束帧
+			//ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 			glfwSwapBuffers(window->window);
 			glfwPollEvents();
 			sem_thread_release();

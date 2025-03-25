@@ -7,8 +7,9 @@ class camera :
 	public GameObject
 {
 public:
-	camera(glm::vec3  position, glm::vec3 target, glm::vec3 worldup) :
-		Position(position),WorldUp(worldup) {
+	camera(glm::vec3  position, glm::vec3 target, glm::vec3 worldup) {
+		transform.Position = position;
+		WorldUp = worldup;
 		this->name = "camera";
 		//Position = position;
 		//WorldUp = worldup;
@@ -18,17 +19,22 @@ public:
 		//Up = glm::vec3(0.0f, 1.0f, 0.0f);
 	}
 
-	camera(glm::vec3 Pos) : Position(Pos) {
+	camera(glm::vec3 Pos) {
 		name = "camera";
-		Forward = glm::normalize(Position - Target);//相机朝向
+		transform.Position = Pos;
+		Forward = glm::normalize(transform.Position - Target);//相机朝向
 		Right = glm::normalize(glm::cross(WorldUp, Forward));//局部右轴 = 上向量叉乘朝向
 		Up = glm::normalize(glm::cross(Forward, Right));//上轴
 		view = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	}
 
-	camera(glm::vec3 Pos, float pitch, float yaw, float roll, glm::vec3 worldup) :Position(Pos), WorldUp(worldup) {
+	camera(glm::vec3 Pos, float pitch, float yaw, float roll, glm::vec3 worldup){
+
+		WorldUp = worldup;
 		name = "camera";
+		transform.Position = Pos;
+		transform.rotate = glm::vec3(pitch, yaw, roll);
 		Pitch = pitch;
 		Yaw = yaw;
 		Roll = roll;
@@ -42,7 +48,7 @@ public:
 		//float camX = sin(glfwGetTime()) * radius;
 		//float camZ = cos(glfwGetTime()) * radius;//end
 		//std::cout << "camer";
-		gb(true);
+		//gb(true);
 		input();
 		//lihtflag = Input->getkey("m");
 		//if (!lihtflag2 && lihtflag) {
@@ -57,28 +63,28 @@ public:
 		Forward = glm::vec3(0.0f, 0.0f, -1.0f);
 		
 		glm::vec3 front;
-		front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-		front.y = sin( glm::radians(Pitch));
-		front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));//修正坐标系偏移；
+		front.x = cos(glm::radians(transform.rotate.y)) * cos(glm::radians(transform.rotate.x));
+		front.y = sin( glm::radians(transform.rotate.x));
+		front.z = sin(glm::radians(transform.rotate.y)) * cos(glm::radians(transform.rotate.x));//修正坐标系偏移；
 		Forward = glm::normalize(front);
 		
 		//Forward = glm::normalize(front);
 		Right = glm::normalize(glm::cross(Forward, WorldUp));
 		Up = glm::normalize(glm::cross(Right, Forward));
-		view = glm::lookAt(Position, Position + Forward, Up);//v矩阵
+		view = glm::lookAt(transform.Position, transform.Position + Forward, Up);//v矩阵
 		//std::cout << "\nx" << Forward.x << "y" << Forward.y << "z" << Forward.z<<"p"<<Pitch<<"y"<<Yaw;
 		projection = glm::perspective(glm::radians(fov), (float)wwidth / (float)wheight, 0.1f, 100.0f);//p矩阵
 		//std::cout << "car" << Position.x;
 	}
 
-	void gb(bool on) {
-		if (on) {
-			glfwSetInputMode(window->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-		}
-		else {
-			glfwSetInputMode(window->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-		}
-	}
+	//void gb(bool on) {
+	//	if (on) {
+	//		glfwSetInputMode(window->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//	}
+	//	else {
+	//		glfwSetInputMode(window->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//	}
+	//}
 	void input() {//输入有关
 		
 		//if (glfwGetKey(window->window, GLFW_KEY_UP) == GLFW_PRESS)
@@ -102,21 +108,21 @@ public:
 		float cameraSpeed = 2.5f * camrtime.getdeltaTime();
 		//float cameraSpeed = 0.05f; // adjust accordingly
 		if (Input->getkey("w"))
-			Position += cameraSpeed * Forward;
+			transform.Position += cameraSpeed * Forward;
 		if (Input->getkey("s"))
-			Position -= cameraSpeed * Forward;
-		Yaw += Input->getaix("Mouse X") * optime.getdeltaTime() * 100;
+			transform.Position -= cameraSpeed * Forward;
+		transform.rotate.y += Input->getaix("Mouse X") * optime.getdeltaTime() * 100;
 		//std::cout << "\tcarx：" << Input->getaix("Mouse X");
-		Pitch -= Input->getaix("Mouse Y") * optime.getdeltaTime() * 100;
+		transform.rotate.x -= Input->getaix("Mouse Y") * optime.getdeltaTime() * 100;
 
 		if (Input->getkey("a"))
-			Position -= glm::normalize(glm::cross(Forward, Up)) * cameraSpeed;
+			transform.Position -= glm::normalize(glm::cross(Forward, Up)) * cameraSpeed;
 		if (Input->getkey("d"))
-			Position += glm::normalize(glm::cross(Forward, Up)) * cameraSpeed;
+			transform.Position += glm::normalize(glm::cross(Forward, Up)) * cameraSpeed;
 		if (Input->getkey("q"))
-			Position += Up * cameraSpeed;
+			transform.Position += Up * cameraSpeed;
 		if (Input->getkey("e"))
-			Position -= Up * cameraSpeed;
+			transform.Position -= Up * cameraSpeed;
 		
 		//std::cout << "m1 x :" << window->input.Mousex << std::endl;
 		//std::cout << "m1 y :" << window->input.Mousey << std::endl;
@@ -125,12 +131,8 @@ public:
 		
 	}
 	float fov = 45.0f;
-	glm::vec3 Position;//位置
 	glm::vec3 Target = glm::vec3(0.0f, 0.0f, 0.0f);//原点
-	glm::vec3 Forward;//相机朝向
-	glm::vec3 WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);//世界上向量
-	glm::vec3 Right;//局部右轴 = 上向量叉乘朝向
-	glm::vec3 Up;//上轴
+	
 	glm::mat4 view;
 	glm::mat4 projection;
 	//void carmain() {

@@ -7,7 +7,10 @@ class LinkNode :
 {
 public:
 
-    LinkNode() {};
+    LinkNode() {
+        name = "linknode";
+        tag = "linknode";
+    };
     GameObject* backDOBJECT;
     GameObject* backCOBJECT;
     void update() override {

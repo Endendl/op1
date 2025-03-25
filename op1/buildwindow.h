@@ -45,6 +45,8 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)//OpenGL
 {
 	Input->updateroll(xoffset, yoffset);
 }
+
+
 class buildwindow
 {
 public:
@@ -63,6 +65,9 @@ public:
 		glfwMakeContextCurrent(window);
 		std::cout << "窗口构建成功" << std::endl;
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);//隐藏光标，并捕捉它
+		//GLFW_CURSOR_NORMAL（默认）：光标可见，可自由移动。
+		//GLFW_CURSOR_HIDDEN：光标隐藏（但仍可移动）。
+		//GLFW_CURSOR_DISABLED：光标锁定并隐藏（适合第一人称视角游戏）。
 		//glfwSetInputMode(window, GLFW_CURSOR_NORMAL, GLFW_CURSOR_DISABLED);
 		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 		glfwSetCursorPosCallback(window, mouse_callback);
@@ -81,8 +86,28 @@ public:
 	GLsizei wheight;
 	inputclass input;//创建一个输入检测
 };
+buildwindow* window;
+int mousemode[3] = { GLFW_CURSOR_NORMAL,GLFW_CURSOR_HIDDEN ,GLFW_CURSOR_DISABLED };
+void setmousemode(int _mode) {
+	if (_mode > 2) {
+		return;
+	}
+	glfwSetInputMode(window->window, GLFW_CURSOR, mousemode[_mode]);//隐藏光标，并捕捉它
+	//GLFW_CURSOR_NORMAL（默认）：光标可见，可自由移动。
+	//GLFW_CURSOR_HIDDEN：光标隐藏（但仍可移动）。
+	//GLFW_CURSOR_DISABLED：光标锁定并隐藏（适合第一人称视角游戏）。
+}
 
+void imguistart() {
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplGlfw_NewFrame();
+	ImGui::NewFrame();
+}
 
+void imguiend() {
+	ImGui::Render();    // imgui 结束帧
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
 #endif // !BUILDWINDOW_H
 
 

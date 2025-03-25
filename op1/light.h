@@ -8,12 +8,16 @@ public:
 	light(int _mode, std::string _name,glm::vec3 _position = glm::vec3(0, 0, 0), glm::vec3 _color = glm::vec3(1.0f, 1.0f, 1.0f)):
 	position(_position), color(_color),name(_name)
 	{
+		name = "light";
+		tag = "light";
 		loadmod(_mode);
 		//UpDatedirection();
 	};
 	light(int _mode, std::string _name,glm::vec3 _position = glm::vec3(0, 0, 0), glm::vec3 _angles = glm::vec3(0, 0, 0), glm::vec3 _color = glm::vec3(1.0f, 1.0f, 1.0f)) :
 	position(_position), angles(glm::vec3(glm::radians(_angles.x), glm::radians(_angles.y), glm::radians(_angles.z))), color(_color), name(_name)
 	{
+		name = "light";
+		tag = "light";
 		loadmod(_mode);
 		UpDatedirection();
 	};

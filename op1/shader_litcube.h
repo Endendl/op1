@@ -68,7 +68,7 @@ public:
         use();
         setMat4("projection", maincar->projection);
         setMat4("view", maincar->view);
-        setVec3("viewPos", maincar->Position);
+        setVec3("viewPos", maincar->transform.Position);
         for (int i = 0; i < Lightlist.LightVector.size(); i++) {
 			//std::cout << i;
             light* l1ght = &Lightlist.LightVector[i];

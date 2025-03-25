@@ -199,6 +199,8 @@
     <ClInclude Include="shader_litcube.h" />
     <ClInclude Include="SphereCollision.h" />
     <ClInclude Include="testAnimatorController.h" />
+    <ClInclude Include="ui_GameObjct_list.h" />
+    <ClInclude Include="ui_objmounts_list.h" />
     <ClInclude Include="w3jx.h" />
   </ItemGroup>
   <ItemGroup>

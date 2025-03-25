@@ -13,7 +13,7 @@ public:
         use();
         setMat4("projection", maincar->projection);
         setMat4("view", maincar->view);
-        setVec3("viewPos", maincar->Position);
+        setVec3("viewPos", maincar->transform.Position);
         int LightDirectional = 0;
         int LightPoit = 0;
         int LightSpot = 0;

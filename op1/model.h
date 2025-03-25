@@ -13,6 +13,7 @@ public:
 	glm::vec3 Position;
 	//AnimatorController* animatorController; // 指向 AnimatorController 派生类的指针//挂载类统一改进
 	model(std::string _path) {
+		tag = "model";
 		transform.Position = glm::vec3(2, 2, 10);
 		transform.rotate = glm::vec3(45.0f, 0, 0);
 		transform.Scale = glm::vec3(1, 1.0f, 1);
