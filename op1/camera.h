@@ -11,6 +11,7 @@ public:
 		transform.Position = position;
 		WorldUp = worldup;
 		this->name = "camera";
+		this->tag = "camera";
 		//Position = position;
 		//WorldUp = worldup;
 		Forward = glm::normalize(target - position);
@@ -21,6 +22,7 @@ public:
 
 	camera(glm::vec3 Pos) {
 		name = "camera";
+		this->tag = "camera";
 		transform.Position = Pos;
 		Forward = glm::normalize(transform.Position - Target);//相机朝向
 		Right = glm::normalize(glm::cross(WorldUp, Forward));//局部右轴 = 上向量叉乘朝向
@@ -33,6 +35,7 @@ public:
 
 		WorldUp = worldup;
 		name = "camera";
+		this->tag = "camera";
 		transform.Position = Pos;
 		transform.rotate = glm::vec3(pitch, yaw, roll);
 		Pitch = pitch;
@@ -111,9 +114,12 @@ public:
 			transform.Position += cameraSpeed * Forward;
 		if (Input->getkey("s"))
 			transform.Position -= cameraSpeed * Forward;
-		transform.rotate.y += Input->getaix("Mouse X") * optime.getdeltaTime() * 100;
-		//std::cout << "\tcarx：" << Input->getaix("Mouse X");
-		transform.rotate.x -= Input->getaix("Mouse Y") * optime.getdeltaTime() * 100;
+		if (Global_variables::inputflag) {
+			transform.rotate.y += Input->getaix("Mouse X") * optime.getdeltaTime() * 100;
+			//std::cout << "\tcarx：" << Input->getaix("Mouse X");
+			transform.rotate.x -= Input->getaix("Mouse Y") * optime.getdeltaTime() * 100;
+		}
+		
 
 		if (Input->getkey("a"))
 			transform.Position -= glm::normalize(glm::cross(Forward, Up)) * cameraSpeed;

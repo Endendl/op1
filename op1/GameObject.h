@@ -55,7 +55,7 @@ public:
 	std::vector<mounting*> Drawmountinglist;
 	std::vector<GameObject*> Children;
 	GameObject* nextOBJCT;
-	std::string tag;
+	std::string tag = "GameObject";
 	glm::vec3 Forward;//相机朝向
 	glm::vec3 WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);//世界上向量
 	glm::vec3 Right;//局部右轴 = 上向量叉乘朝向

@@ -45,7 +45,10 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)//OpenGL
 {
 	Input->updateroll(xoffset, yoffset);
 }
-
+namespace Global_variables {
+	int inputflag;
+	glm::vec3 Globalcolor = glm::vec3(0.2f, 0.3f, 0.3f);
+}
 
 class buildwindow
 {
@@ -93,6 +96,7 @@ void setmousemode(int _mode) {
 		return;
 	}
 	glfwSetInputMode(window->window, GLFW_CURSOR, mousemode[_mode]);//隐藏光标，并捕捉它
+	Global_variables::inputflag = _mode;
 	//GLFW_CURSOR_NORMAL（默认）：光标可见，可自由移动。
 	//GLFW_CURSOR_HIDDEN：光标隐藏（但仍可移动）。
 	//GLFW_CURSOR_DISABLED：光标锁定并隐藏（适合第一人称视角游戏）。

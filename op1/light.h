@@ -6,23 +6,25 @@ class light :
 {
 public:
 	light(int _mode, std::string _name,glm::vec3 _position = glm::vec3(0, 0, 0), glm::vec3 _color = glm::vec3(1.0f, 1.0f, 1.0f)):
-	position(_position), color(_color),name(_name)
+	color(_color),name(_name)
 	{
-		name = "light";
+		transform.Position = _position;
+		name = _name;
 		tag = "light";
 		loadmod(_mode);
 		//UpDatedirection();
 	};
 	light(int _mode, std::string _name,glm::vec3 _position = glm::vec3(0, 0, 0), glm::vec3 _angles = glm::vec3(0, 0, 0), glm::vec3 _color = glm::vec3(1.0f, 1.0f, 1.0f)) :
-	position(_position), angles(glm::vec3(glm::radians(_angles.x), glm::radians(_angles.y), glm::radians(_angles.z))), color(_color), name(_name)
+	 angles(glm::vec3(glm::radians(_angles.x), glm::radians(_angles.y), glm::radians(_angles.z))), color(_color), name(_name)
 	{
-		name = "light";
+		transform.Position = _position;
+		name = _name;
 		tag = "light";
 		loadmod(_mode);
 		UpDatedirection();
 	};
 	std::string name;
-	glm::vec3 position;
+	//glm::vec3 position;
 	glm::vec3 angles;
 	glm::vec3 direction = glm::vec3(0, 0, 1.0f);
 	glm::vec3 color;

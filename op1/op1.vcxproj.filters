@@ -218,6 +218,9 @@
     <ClInclude Include="imgui_ui.h">
       <Filter>头文件\gameobjct\ui</Filter>
     </ClInclude>
+    <ClInclude Include="ui_Global_variables.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vs.vert">

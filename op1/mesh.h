@@ -8,8 +8,11 @@ class mesh :
 	public mounting
 {
 public:
-	mesh() {};
+	mesh() {
+		tag = "mesh";
+	};
 	~mesh() {};
+	
 	struct Vertex 
 	{
 		glm::vec3 Position;//Œª÷√

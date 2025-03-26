@@ -8,6 +8,7 @@ class firstobj :
 public:
     firstobj() {
 		name = "firstobj";
+		tag = "notGameObject";
         //mountinglist.push_back(new fstobjupdate());
     };
     void update() override {
@@ -31,8 +32,8 @@ public:
 		//processInput(window2->window);
 		glfwMakeContextCurrent(window->window);//linshi
 		//背景色
-
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		
+		glClearColor(Global_variables::Globalcolor.x, Global_variables::Globalcolor.y, Global_variables::Globalcolor.z, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);//GL_DEPTH_BUFFER_BIT来清除深度缓冲 色彩 | 深度缓冲 | 模板
 		glDepthFunc(GL_LESS);//深度缓冲类型
 		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);

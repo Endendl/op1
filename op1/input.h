@@ -82,3 +82,4 @@ private:
 	
 };
 inputclass* Input = NULL;;//主要输入指针
+

@@ -5,9 +5,11 @@ class CapsuleCollision :
 {
 public:
     CapsuleCollision(GameObject* _obj, int _Species, glm::vec3 _center, float l1 ,float l2 ,float R) {
+        name = "CapsuleCollision";
         collisionlist.push_back(this);
         gameobjct = _obj;
-        Species = _Species;
+        //Species = _Species;
+        Species = 2;
         center = _center;
         Pos = _center + gameobjct->transform.Position;
     }

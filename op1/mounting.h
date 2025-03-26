@@ -11,7 +11,7 @@ public:
 	virtual void update() {};//实现挂载更新
 	virtual void Draw() { std::cout << "0"; };
 	GameObject* gameobjct;
-	std::string tag = "?";
+	std::string tag = "mounting";
 };
 
 #endif // !MOUNTING_H

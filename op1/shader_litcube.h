@@ -78,7 +78,7 @@ public:
             //setMat4("view", maincar->view);
             glm::mat4 model = glm::mat4(1.0f);
             //glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
-            model = glm::translate(model, l1ght->position);
+            model = glm::translate(model, l1ght->transform.Position);
             //model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
             setMat4("model", model);
 			//float angle = 20.0f * i;

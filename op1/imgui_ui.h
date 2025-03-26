@@ -6,6 +6,7 @@
 #include "ImGui/imgui_impl_opengl3.h"
 namespace Gui {
     GameObject* masterobj;
+    
 }
 class imgui_ui :
     public GameObject
@@ -13,6 +14,7 @@ class imgui_ui :
 public:
     imgui_ui() {
         name = "ui";
+        tag = "UI";
     };
     std::vector<GameObject*> objlist;
     

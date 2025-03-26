@@ -18,6 +18,7 @@ using std::shared_ptr;
 using std::make_shared;
 
 #include "light.h"
+
 #include "camera.h"
 
 #include "shader_lige.h"
@@ -45,6 +46,7 @@ using std::make_shared;
 #include "imgui_ui.h"
 #include "ui_GameObjct_list.h"
 #include "ui_objmounts_list.h"
+#include "ui_Global_variables.h"
 //#include "imgui_ui.h"
 //#include "ImGui/imgui.h"
 //buildwindow* window2;
@@ -125,6 +127,7 @@ void in1t() {
 	//DObjctadd(new imgui_ui());
 	DObjctadd(new ui_GameObjct_list());
 	DObjctadd(new ui_objmounts_list());
+	DObjctadd(new ui_Global_variables());
 	DObjctadd(new camera(glm::vec3(0.0f, 0.0f, -3.0f), 0.0f, 90.0f, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f)));
 	maincar = static_cast<camera*>(linknode->backDOBJECT);
 	DObjctadd(new model(PATH + "\\assets\\model\\backpack\\backpack.obj"));

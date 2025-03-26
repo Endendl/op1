@@ -21,7 +21,7 @@ public:
         for (int i = 0; i < Lightlist.LightVector.size(); i++) {
             light* l1ght = &Lightlist.LightVector[i];
             if (l1ght->mod == light::Directional) {
-                //setVec3(("lightD[" + std::to_string(LightDirectional) + "].position"), l1ght->position);//平行光用不上
+                //setVec3(("lightD[" + std::to_string(LightDirectional) + "].position"), l1ght->transform.Position);//平行光用不上
                 setVec3(("lightD[" + std::to_string(LightDirectional) + "].color").c_str(), l1ght->color);
                 setVec3(("lightD[" + std::to_string(LightDirectional) + "].dirToLight").c_str(), l1ght->direction);
                 //std::cout << l1ght->direction.x << " " << l1ght->direction.y << " " << l1ght->direction.z << std::endl;
@@ -29,7 +29,7 @@ public:
                 LightDirectional++;
             }
             else if (l1ght->mod == light::Point) {
-                setVec3(("lightP[" + std::to_string(LightPoit) + "].position").c_str(), l1ght->position);
+                setVec3(("lightP[" + std::to_string(LightPoit) + "].position").c_str(), l1ght->transform.Position);
                 setVec3(("lightP[" + std::to_string(LightPoit) + "].color").c_str(), l1ght->color);
                 setFloat(("lightP[" + std::to_string(LightPoit) + "].constant").c_str(), l1ght->constant);
                 setFloat(("lightP[" + std::to_string(LightPoit) + "].linear").c_str(), l1ght->linear);
@@ -37,7 +37,7 @@ public:
                 LightPoit++;
             }
             else if (l1ght->mod == light::Spot) {
-                setVec3("lightS[" + std::to_string(LightSpot) + "].position", l1ght->position);
+                setVec3("lightS[" + std::to_string(LightSpot) + "].position", l1ght->transform.Position);
                 setVec3("lightS[" + std::to_string(LightSpot) + "].color", l1ght->color);
 
                 setVec3("lightS[" + std::to_string(LightSpot) + "].dirToLight", l1ght->direction);

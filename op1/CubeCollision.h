@@ -6,9 +6,11 @@ class CubeCollision :
 {
 public:
     CubeCollision(GameObject* _obj, int _Species, glm::vec3 _center, float _x, float _y, float _z) {
+        name = "CubeCollision";
         collisionlist.push_back(this);
         gameobjct = _obj;
-        Species = _Species;
+        //Species = _Species;
+        Species = 1;
         center = _center;
         Pos = _center + gameobjct->transform.Position;
         x = _x;
