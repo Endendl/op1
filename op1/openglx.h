@@ -47,6 +47,8 @@ using std::make_shared;
 #include "ui_GameObjct_list.h"
 #include "ui_objmounts_list.h"
 #include "ui_Global_variables.h"
+
+#include "Json_lode.h"
 //#include "imgui_ui.h"
 //#include "ImGui/imgui.h"
 //buildwindow* window2;
@@ -109,8 +111,15 @@ GameObject* thisis;
 
 model* objss;
 animator* animast;
-
-void in1t() {
+void in1tjson() {
+	objp = new fp(stobj);
+	OBJCT1 = &stobj;
+	stobj.nextOBJCT = linknode;
+	if (linknode) {
+		linknode->backDOBJECT = &stobj;
+	}
+}
+void in1tdemo() {
 	//着色器添加
 	shaderlist.push_back(new shader_a("a", std::string(PATH + "\\assets\\shader\\a3.vert").c_str(), std::string(PATH + "\\assets\\shader\\a.frag").c_str()));
 	shaderlist.push_back(new shader_lige("lite", std::string(PATH + "\\assets\\shader\\litevs.vert").c_str(), std::string(PATH + "\\assets\\shader\\litefs.frag").c_str()));
@@ -181,38 +190,76 @@ void in1t() {
 }
 bool lihtflag = false;
 bool lihtflag2 = false;
+void in1t() {//初始化
+	//bool in1ton = true;
+	while (1) {//创建初始化窗口
+		imguistart();
+		glfwMakeContextCurrent(window->window);//linshi
+		//背景色
+		glClearColor(Global_variables::Globalcolor.x, Global_variables::Globalcolor.y, Global_variables::Globalcolor.z, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);//GL_DEPTH_BUFFER_BIT来清除深度缓冲 色彩 | 深度缓冲 | 模板
+		glDepthFunc(GL_LESS);//深度缓冲类型
+		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+		glStencilMask(0xFF); // 启用模板缓冲写入
 
+		static char text[512] = "n"; // 缓冲区需足够大
+
+		if (ImGui::InputText("path", text, IM_ARRAYSIZE(text))) {
+		}
+		if (ImGui::Button("json lodeing")) {
+			Json_lode lodejson;
+			std::string load(text);
+			lodejson.openjson(load);
+			glfwSwapBuffers(window->window);
+			glfwPollEvents();
+			in1tjson();
+			break;
+		}
+		if (ImGui::Button("in1t demo")) {
+			imguiend();
+			glfwSwapBuffers(window->window);
+			glfwPollEvents();
+			in1tdemo();
+			break;
+		}
+		imguiend();
+		glfwSwapBuffers(window->window);
+		glfwPollEvents();
+		
+	}
+	
+}
 
 void runupdate(){//主线程
 
 	GameObject* obj = &stobj;
 	int num = 0;
 	std::cout << std::endl;
-	while (1) {
-		std::cout << "编号：" << num << " 物体名称：" << obj->name << std::endl;
-		std::cout << "子物体队列-" << " 数量：" << obj->Children.size() << "{" << std::endl;
-		for (int i = 0; i < obj->Children.size(); i++)
-		{
-			std::cout << i << ":" << obj->Children[i]->name << "  " << std::endl;
-		}
-		std::cout << "}\n挂载队列-" << " 数量：" << obj->mountinglist.size() << "{" << std::endl;
-		for (int i = 0; i < obj->mountinglist.size(); i++)
-		{
-			std::cout << i << ":" << obj->mountinglist[i]->name << "  " << std::endl;
-		}
-		std::cout << "}\n可绘制挂载队列-" << " 数量：" << obj->Drawmountinglist.size() << "{" << std::endl;
-		for (int i = 0; i < obj->Drawmountinglist.size(); i++)
-		{
-			std::cout << i << ":" << obj->Drawmountinglist[i]->name << "  " << std::endl;
-		}
-		std::cout << "}" << std::endl;
-		num++;
-		if (obj->nextOBJCT == NULL)
-		{
-			break;
-		}
-		obj = obj->nextOBJCT;
-	}
+	//while (1) {
+	//	std::cout << "编号：" << num << " 物体名称：" << obj->name << std::endl;
+	//	std::cout << "子物体队列-" << " 数量：" << obj->Children.size() << "{" << std::endl;
+	//	for (int i = 0; i < obj->Children.size(); i++)
+	//	{
+	//		std::cout << i << ":" << obj->Children[i]->name << "  " << std::endl;
+	//	}
+	//	std::cout << "}\n挂载队列-" << " 数量：" << obj->mountinglist.size() << "{" << std::endl;
+	//	for (int i = 0; i < obj->mountinglist.size(); i++)
+	//	{
+	//		std::cout << i << ":" << obj->mountinglist[i]->name << "  " << std::endl;
+	//	}
+	//	std::cout << "}\n可绘制挂载队列-" << " 数量：" << obj->Drawmountinglist.size() << "{" << std::endl;
+	//	for (int i = 0; i < obj->Drawmountinglist.size(); i++)
+	//	{
+	//		std::cout << i << ":" << obj->Drawmountinglist[i]->name << "  " << std::endl;
+	//	}
+	//	std::cout << "}" << std::endl;
+	//	num++;
+	//	if (obj->nextOBJCT == NULL)
+	//	{
+	//		break;
+	//	}
+	//	obj = obj->nextOBJCT;
+	//}
 	std::cout << std::endl;
 	std::cout << std::endl;
 
@@ -262,6 +309,7 @@ void runupdate(){//主线程
 }
 int rend() {
 	in1t();
+	//in1tdemo();
 	bool lihtflag = false;
 	bool lihtflag2 = false;
 	//Pthread ba(1);

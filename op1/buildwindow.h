@@ -67,7 +67,7 @@ public:
 		}
 		glfwMakeContextCurrent(window);
 		std::cout << "窗口构建成功" << std::endl;
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);//隐藏光标，并捕捉它
+		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);//隐藏光标，并捕捉它
 		//GLFW_CURSOR_NORMAL（默认）：光标可见，可自由移动。
 		//GLFW_CURSOR_HIDDEN：光标隐藏（但仍可移动）。
 		//GLFW_CURSOR_DISABLED：光标锁定并隐藏（适合第一人称视角游戏）。

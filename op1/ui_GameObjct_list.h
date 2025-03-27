@@ -49,7 +49,7 @@ public:
 
         if (ImGui::CollapsingHeader(name.c_str(),  ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_Framed)) { //创建折叠分组
             //ImGuiTreeNodeFlags_DefaultOpen - 默认展 ImGuiTreeNodeFlags_None - 默认折叠（不指定时的默认行为） ImGuiTreeNodeFlags_Framed - 带边框样式
-            ImGui::BeginChild("gameobj", ImVec2(window_size.x - 10, window_size.y - 75), true);////创建子窗口
+            ImGui::BeginChild("gameobj", ImVec2(window_size.x - 10, objlist.size() * 25), true);////创建子窗口
             printobjlist(objlist);
             ImGui::EndChild();
             
@@ -61,7 +61,7 @@ public:
         }    
         if (ImGui::CollapsingHeader("LIGHT LIST", ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_Framed)) {//光列表
 
-            ImGui::BeginChild("light", ImVec2(window_size.x - 10, window_size.y - 75), true);//创建子窗口
+            ImGui::BeginChild("light", ImVec2(window_size.x - 10, Lightlist.LightVector.size() * 25), true);//创建子窗口
             printlight();
             ImGui::EndChild();
         }
