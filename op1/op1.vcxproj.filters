@@ -218,9 +218,6 @@
     <ClInclude Include="imgui_ui.h">
       <Filter>头文件\gameobjct\ui</Filter>
     </ClInclude>
-    <ClInclude Include="ui_Global_variables.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Json_lode.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -361,6 +358,9 @@
     </ClInclude>
     <ClInclude Include="nlohmann\ordered_map.hpp">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ui_Global_variables.h">
+      <Filter>头文件\gameobjct\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

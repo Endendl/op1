@@ -21,9 +21,10 @@ class animation
 {
 public:
 	animation() = default;
-
+	std::string path;
 	animation(std::string& animationPath, model* _model)
 	{ // 使用Assimp加载动画文件
+		path = animationPath;
 		Assimp::Importer importer;
 		const aiScene* scene = importer.ReadFile(animationPath, aiProcess_Triangulate);
 		assert(scene && scene->mRootNode); // 确保场景和根节点存在

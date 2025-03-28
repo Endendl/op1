@@ -9,13 +9,13 @@ public:
 	opengl_shader* thisshader;
 	GameObject() {
 		transform.Position = glm::vec3(0, 0, 0);
-		transform.rotate = glm::vec3(45.0f, 0, 0);
+		transform.Rotate = glm::vec3(45.0f, 0, 0);
 		transform.Scale = glm::vec3(1, 1, 1);
 	};
 	struct
 	{
 		glm::vec3 Position;
-		glm::vec3 rotate;
+		glm::vec3 Rotate;
 		glm::vec3 Scale;
 
 	}transform;

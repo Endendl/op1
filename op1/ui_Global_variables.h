@@ -1,11 +1,13 @@
 #pragma once
 #include "imgui_ui.h"
+#include "Json_lode.h"
 class ui_Global_variables :
     public imgui_ui
 {
 public:
     ui_Global_variables(){
         name = "Global variables";
+        tag = "UI";
     }
     float pickerColor[3];
     glm::vec3 FToGlmVec3(float a[]) {
@@ -31,14 +33,16 @@ public:
     }
 
     void lodeingmode() {
-        static char text[512] = "n"; // 缓冲区需足够大
+        if (ImGui::CollapsingHeader("impart model", ImGuiTreeNodeFlags_Framed)) {//绘制模型导入
+            static char text[512] = "n"; // 缓冲区需足够大
 
-        if (ImGui::InputText("path", text, IM_ARRAYSIZE(text))) {
-        }
-        if (ImGui::Button("lodeing")) {
-            std::string load(text);
-            DObjctadd(new model(load));
-            linknode->backDOBJECT->thisshader = shaderlist[0];
+            if (ImGui::InputText("path", text, IM_ARRAYSIZE(text))) {
+            }
+            if (ImGui::Button("lodeing")) {
+                std::string load(text);
+                DObjctadd(new model(load));
+                linknode->backDOBJECT->thisshader = shaderlist[0];
+            }
         }
     }
 
@@ -46,21 +50,25 @@ public:
 
 
     void savejson() {
-        static char text[512] = "n"; // 缓冲区需足够大
-        if (ImGui::InputText("path", text, IM_ARRAYSIZE(text))) {
-        }
-        if (ImGui::Button("save")) {
-            Json_lode sjson;
-            
+        if (ImGui::CollapsingHeader("save json", ImGuiTreeNodeFlags_Framed)) {//绘制json 保存
+            static char text[512] = "n"; // 缓冲区需足够大
+            if (ImGui::InputText("path###1", text, IM_ARRAYSIZE(text))) {
+            }
+            if (ImGui::Button("save")) {
+                Json_lode sjson;
+                sjson.objsave();
+                sjson.outjson(text, 2);
+            }
         }
     }
     void UIDraw() override {
         const float input_width = 90.0f;
        
-        SETcolor(Global_variables::Globalcolor);
-        if (ImGui::CollapsingHeader("impart model", ImGuiTreeNodeFlags_Framed)) {
-            lodeingmode();
-        }
+        SETcolor(Global_variables::Globalcolor);//绘制 背景色选择
+
+        lodeingmode();
+        
+        savejson();
 
     }
 };

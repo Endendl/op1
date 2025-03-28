@@ -16,7 +16,7 @@ public:
 		tag = "model";
 		fpath = _path;
 		transform.Position = glm::vec3(2, 2, 10);
-		transform.rotate = glm::vec3(45.0f, 0, 0);
+		transform.Rotate = glm::vec3(45.0f, 0, 0);
 		transform.Scale = glm::vec3(1, 1.0f, 1);
 		meshlist tmpmesh(this, _path);//一次性工具类meshlist内封装了众多构造所需函数，减少mesh占用资源，会把mesh提取出来加到模型物体的两个挂载队列下
 		m_BoneInfoMap = tmpmesh.m_BoneInfoMap;

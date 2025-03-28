@@ -159,7 +159,7 @@ void in1tdemo() {
 	std::string path = PATH + "\\assets\\model\\45\\45.dae";
 	linknode->backDOBJECT->thisshader = shaderlist[0];
 	linknode->backDOBJECT->transform.Position = glm::vec3(0.0f, 0.0f, 0.0f);
-	linknode->backDOBJECT->transform.rotate = glm::vec3(0.0f, 0.0f, 0.0f);
+	linknode->backDOBJECT->transform.Rotate = glm::vec3(0.0f, 0.0f, 0.0f);
 	linknode->backDOBJECT->transform.Scale = glm::vec3(0.020f, 0.020f, 0.020f);
 
 	objss = dynamic_cast<model*>(linknode->backDOBJECT);

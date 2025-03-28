@@ -85,19 +85,19 @@ public:
                 ImGui::Text("X:");          // 标签
                 ImGui::SameLine();          // 保持在同一行
                 ImGui::SetNextItemWidth(input_width); //宽度
-                ImGui::InputFloat("##RX", &_obj->transform.rotate.x,  IM_ARRAYSIZE(&_obj->transform.rotate.x)); // "##X" 隐藏标签，避免重复显示
+                ImGui::InputFloat("##RX", &_obj->transform.Rotate.x,  IM_ARRAYSIZE(&_obj->transform.Rotate.x)); // "##X" 隐藏标签，避免重复显示
                 // Y 输入框
                 ImGui::SameLine();
                 ImGui::Text("Y:");
                 ImGui::SameLine();
                 ImGui::SetNextItemWidth(input_width);
-                ImGui::InputFloat("##RY", &_obj->transform.rotate.y,  IM_ARRAYSIZE(&_obj->transform.rotate.y));
+                ImGui::InputFloat("##RY", &_obj->transform.Rotate.y,  IM_ARRAYSIZE(&_obj->transform.Rotate.y));
                 // Z 输入框
                 ImGui::SameLine();
                 ImGui::Text("Z:");
                 ImGui::SameLine();
                 ImGui::SetNextItemWidth(input_width);
-                ImGui::InputFloat("##RZ", &_obj->transform.rotate.z,  IM_ARRAYSIZE(&_obj->transform.rotate.z));
+                ImGui::InputFloat("##RZ", &_obj->transform.Rotate.z,  IM_ARRAYSIZE(&_obj->transform.Rotate.z));
                 
                 
                 ImGui::Text("Scale:");          // 标签

@@ -18,6 +18,8 @@ public:
 		in1t(vertexPath, fragmentPath);
 	};
 	void in1t(const char* vertexPath, const char* fragmentPath){
+		vertPath = vertexPath;
+		fragPath = fragmentPath;
 		//¶ÁÈëshaderÎÄ¼ş
 		std::string vertexCode;
 		std::string fragmentCode;
@@ -98,7 +100,8 @@ public:
 		DIFFUSE,
 		SPECULAR
 	};
-
+	std::string vertPath;
+	std::string fragPath;
 public:
 	void update() {
 		use();

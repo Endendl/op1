@@ -7,6 +7,7 @@ class SphereCollision :
 public:
     SphereCollision(GameObject* _obj, int _Species, glm::vec3 _center, float _R) {
         name = "SphereCollision";
+        tag = "SphereCollision";
         collisionlist.push_back(this);
         gameobjct = _obj;
         //Species = _Species;

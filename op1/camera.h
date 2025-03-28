@@ -37,7 +37,7 @@ public:
 		name = "camera";
 		this->tag = "camera";
 		transform.Position = Pos;
-		transform.rotate = glm::vec3(pitch, yaw, roll);
+		transform.Rotate = glm::vec3(pitch, yaw, roll);
 		Pitch = pitch;
 		Yaw = yaw;
 		Roll = roll;
@@ -66,9 +66,9 @@ public:
 		Forward = glm::vec3(0.0f, 0.0f, -1.0f);
 		
 		glm::vec3 front;
-		front.x = cos(glm::radians(transform.rotate.y)) * cos(glm::radians(transform.rotate.x));
-		front.y = sin( glm::radians(transform.rotate.x));
-		front.z = sin(glm::radians(transform.rotate.y)) * cos(glm::radians(transform.rotate.x));//修正坐标系偏移；
+		front.x = cos(glm::radians(transform.Rotate.y)) * cos(glm::radians(transform.Rotate.x));
+		front.y = sin( glm::radians(transform.Rotate.x));
+		front.z = sin(glm::radians(transform.Rotate.y)) * cos(glm::radians(transform.Rotate.x));//修正坐标系偏移；
 		Forward = glm::normalize(front);
 		
 		//Forward = glm::normalize(front);
@@ -115,9 +115,9 @@ public:
 		if (Input->getkey("s"))
 			transform.Position -= cameraSpeed * Forward;
 		if (Global_variables::inputflag) {
-			transform.rotate.y += Input->getaix("Mouse X") * optime.getdeltaTime() * 100;
+			transform.Rotate.y += Input->getaix("Mouse X") * optime.getdeltaTime() * 100;
 			//std::cout << "\tcarx：" << Input->getaix("Mouse X");
-			transform.rotate.x -= Input->getaix("Mouse Y") * optime.getdeltaTime() * 100;
+			transform.Rotate.x -= Input->getaix("Mouse Y") * optime.getdeltaTime() * 100;
 		}
 		
 

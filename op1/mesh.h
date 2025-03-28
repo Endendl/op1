@@ -63,9 +63,9 @@ public:
 		glm::mat4 model = glm::mat4(1.0f);
 		
 		model = glm::translate(model, gameobjct->transform.Position);
-		model = glm::rotate(model, glm::radians(gameobjct->transform.rotate.x), glm::vec3(1.0,0,0));
-		model = glm::rotate(model, glm::radians(gameobjct->transform.rotate.y), glm::vec3(0,1.0,0));
-		model = glm::rotate(model, glm::radians(gameobjct->transform.rotate.z), glm::vec3(0,0,1.0));
+		model = glm::rotate(model, glm::radians(gameobjct->transform.Rotate.x), glm::vec3(1.0,0,0));
+		model = glm::rotate(model, glm::radians(gameobjct->transform.Rotate.y), glm::vec3(0,1.0,0));
+		model = glm::rotate(model, glm::radians(gameobjct->transform.Rotate.z), glm::vec3(0,0,1.0));
 		model = glm::scale(model, gameobjct->transform.Scale);
 		//model = glm::translate(model, gameobjct->transform.Position);
 		shader->setMat4("model", model);
@@ -111,6 +111,7 @@ public:
 		this->textures = textures;
 		this->indices = indices;
 		setupMesh();
+		tag = "mesh";
 
 	};
 	mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures, bool _setPosition, bool _setNorma, bool _setTexCoords, bool _setTangent, bool _setBitangent, bool _setm_BoneIDs, bool _setm_Weights) {
@@ -125,12 +126,13 @@ public:
 		this->setm_BoneIDs = _setm_BoneIDs;
 		this->setm_Weights = _setm_Weights;
 		setupMesh();
+		tag = "mesh";
 	};
 	mesh(float vertices[]) {
 		this->vertices.resize(36);
 		memcpy(&(this->vertices[0]), vertices, 36 * 8 * sizeof(float));
 		setupMesh();
-
+		tag = "mesh";
 	};
 private:
 	/*  äÖÈ¾Êý¾Ý  */

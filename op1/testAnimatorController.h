@@ -6,10 +6,12 @@ class testAnimatorCcontroller :
 public:
     testAnimatorCcontroller() {
         name = "testAnimatorCcontroller";
+        tag = "testAnimatorCcontroller";
 
     };
     testAnimatorCcontroller(animator* _animator) {
         name = "testAnimatorCcontroller";
+        tag = "testAnimatorCcontroller";
         animators = _animator;
     };
 
