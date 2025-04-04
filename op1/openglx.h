@@ -132,44 +132,39 @@ void in1tdemo() {
 		linknode->backDOBJECT = &stobj;
 	}
 	stobj.mountingadd(new fstobjupdate());
-	//DObjctadd(new camera(glm::vec3(0.0f, 0.0f, -3.0f), 0.0f, 90.0f, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f)));
-	//DObjctadd(new imgui_ui());
 	DObjctadd(new ui_GameObjct_list());
 	DObjctadd(new ui_objmounts_list());
 	DObjctadd(new ui_Global_variables());
 	DObjctadd(new camera(glm::vec3(0.0f, 0.0f, -3.0f), 0.0f, 90.0f, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f)));
 	maincar = static_cast<camera*>(linknode->backDOBJECT);
-	DObjctadd(new model(PATH + "\\assets\\model\\backpack\\backpack.obj"));
-	linknode->backDOBJECT->thisshader = shaderlist[0];
-	add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
-	
-	DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\liandao.obj"));
-	linknode->backDOBJECT->thisshader = shaderlist[0];
-
-	DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\liandao.obj"));
-	linknode->backDOBJECT->thisshader = shaderlist[0];
-	add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
-	
-	thisis = linknode->backDOBJECT;
-	DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\nanosuit.obj"));
-	linknode->backDOBJECT->thisshader = shaderlist[0];
-	add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
-
-	DObjctadd(new model(PATH + "\\assets\\model\\45\\45.dae"));
-	std::string path = PATH + "\\assets\\model\\45\\45.dae";
-	linknode->backDOBJECT->thisshader = shaderlist[0];
-	linknode->backDOBJECT->transform.Position = glm::vec3(0.0f, 0.0f, 0.0f);
-	linknode->backDOBJECT->transform.Rotate = glm::vec3(0.0f, 0.0f, 0.0f);
-	linknode->backDOBJECT->transform.Scale = glm::vec3(0.020f, 0.020f, 0.020f);
-
-	objss = dynamic_cast<model*>(linknode->backDOBJECT);
-	//std::cout <<" obj " << objss->GetBoneCount();
-	animationslist.push_back(animation(path, objss));//加入动画进动画机
-	animatorlist.push_back(new animatorC());
-	animast = animatorlist.back();
-	animast->gameobjct = objss;
-	animast->addanimation(animationslist.back());
-	addtestAnimatorController(objss, new testAnimatorCcontroller(animast));//创建动画控制器和动画机
+	//DObjctadd(new model(PATH + "\\assets\\model\\backpack\\backpack.obj"));
+	//linknode->backDOBJECT->thisshader = shaderlist[0];
+	//add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
+	//
+	//DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\liandao.obj"));
+	//linknode->backDOBJECT->thisshader = shaderlist[0];
+	//add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
+	//
+	//thisis = linknode->backDOBJECT;
+	//DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\nanosuit.obj"));
+	//linknode->backDOBJECT->thisshader = shaderlist[0];
+	//add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
+	//
+	//DObjctadd(new model(PATH + "\\assets\\model\\45\\45.dae"));
+	//std::string path = PATH + "\\assets\\model\\45\\45.dae";
+	//linknode->backDOBJECT->thisshader = shaderlist[0];
+	//linknode->backDOBJECT->transform.Position = glm::vec3(0.0f, 0.0f, 0.0f);
+	//linknode->backDOBJECT->transform.Rotate = glm::vec3(0.0f, 0.0f, 0.0f);
+	//linknode->backDOBJECT->transform.Scale = glm::vec3(0.020f, 0.020f, 0.020f);
+	//
+	//objss = dynamic_cast<model*>(linknode->backDOBJECT);
+	////std::cout <<" obj " << objss->GetBoneCount();
+	//animationslist.push_back(animation(path, objss));//加入动画进动画机
+	//animatorlist.push_back(new animatorC());
+	//animast = animatorlist.back();
+	//animast->gameobjct = objss;
+	//animast->addanimation(animationslist.back());
+	//addtestAnimatorController(objss, new testAnimatorCcontroller(animast));//创建动画控制器和动画机
 	
 	//std::cout << "name" << animationslist.back().name;
 
@@ -202,19 +197,19 @@ void in1t() {//初始化
 		glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 		glStencilMask(0xFF); // 启用模板缓冲写入
 
-		static char text[512] = "n"; // 缓冲区需足够大
+		//static char text[512] = "n"; // 缓冲区需足够大
 
-		if (ImGui::InputText("path", text, IM_ARRAYSIZE(text))) {
-		}
-		if (ImGui::Button("json lodeing")) {
-			Json_lode lodejson;
-			std::string load(text);
-			lodejson.openjson(load);
-			glfwSwapBuffers(window->window);
-			glfwPollEvents();
-			in1tjson();
-			break;
-		}
+		//if (ImGui::InputText("path", text, IM_ARRAYSIZE(text))) {
+		//}
+		//if (ImGui::Button("json lodeing")) {
+		//	Json_lode lodejson;
+		//	std::string load(text);
+		//	lodejson.openjson(load);
+		//	glfwSwapBuffers(window->window);
+		//	glfwPollEvents();
+		//	in1tjson();
+		//	break;
+		//}
 		if (ImGui::Button("in1t demo")) {
 			imguiend();
 			glfwSwapBuffers(window->window);

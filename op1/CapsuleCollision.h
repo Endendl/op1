@@ -12,6 +12,9 @@ public:
         //Species = _Species;
         Species = 2;
         center = _center;
+        this->l1 = l1;
+        this->l2 = l2;
+        this->R = R;
         Pos = _center + gameobjct->transform.Position;
     }
     float R;//Çò°ë¾¶

@@ -11,7 +11,6 @@ class model :
 {
 public:
 	glm::vec3 Position;
-	//AnimatorController* animatorController; // 指向 AnimatorController 派生类的指针//挂载类统一改进
 	model(std::string _path) {
 		tag = "model";
 		fpath = _path;
