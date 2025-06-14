@@ -253,6 +253,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fs.frag" />
+    <None Include="gameobj.cd" />
+    <None Include="mount.cd" />
+    <None Include="mountcollision.cd" />
+    <None Include="mountlight.cd" />
     <None Include="packages.config" />
     <None Include="shader\litcube00.frag" />
     <None Include="shader\litcube00.vert" />

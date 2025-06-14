@@ -375,6 +375,10 @@
     <None Include="shader\litcube00.frag" />
     <None Include="shader\litcube00.vert" />
     <None Include="shader\litefs.frag" />
+    <None Include="gameobj.cd" />
+    <None Include="mount.cd" />
+    <None Include="mountcollision.cd" />
+    <None Include="mountlight.cd" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="container.jpg">

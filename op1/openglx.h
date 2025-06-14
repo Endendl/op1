@@ -136,35 +136,37 @@ void in1tdemo() {
 	DObjctadd(new ui_objmounts_list());
 	DObjctadd(new ui_Global_variables());
 	DObjctadd(new camera(glm::vec3(0.0f, 0.0f, -3.0f), 0.0f, 90.0f, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f)));
+
 	maincar = static_cast<camera*>(linknode->backDOBJECT);
-	//DObjctadd(new model(PATH + "\\assets\\model\\backpack\\backpack.obj"));
-	//linknode->backDOBJECT->thisshader = shaderlist[0];
-	//add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
+	DObjctadd(new model(PATH + "\\assets\\model\\backpack\\backpack.obj"));
+	linknode->backDOBJECT->thisshader = shaderlist[0];
+	add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
 	//
 	//DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\liandao.obj"));
 	//linknode->backDOBJECT->thisshader = shaderlist[0];
 	//add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
 	//
-	//thisis = linknode->backDOBJECT;
-	//DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\nanosuit.obj"));
-	//linknode->backDOBJECT->thisshader = shaderlist[0];
-	//add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);
+	thisis = linknode->backDOBJECT;
+	DObjctadd(new model(PATH + "\\assets\\model\\nanosuit\\nanosuit.obj"));
+	linknode->backDOBJECT->thisshader = shaderlist[0];
+	add_SphereCollision(linknode->backDOBJECT, 0, glm::vec3(0.0f, 0.0f, 0.0f), 10.0f);//挂载球形碰撞
+
 	//
-	//DObjctadd(new model(PATH + "\\assets\\model\\45\\45.dae"));
-	//std::string path = PATH + "\\assets\\model\\45\\45.dae";
-	//linknode->backDOBJECT->thisshader = shaderlist[0];
-	//linknode->backDOBJECT->transform.Position = glm::vec3(0.0f, 0.0f, 0.0f);
-	//linknode->backDOBJECT->transform.Rotate = glm::vec3(0.0f, 0.0f, 0.0f);
-	//linknode->backDOBJECT->transform.Scale = glm::vec3(0.020f, 0.020f, 0.020f);
-	//
-	//objss = dynamic_cast<model*>(linknode->backDOBJECT);
-	////std::cout <<" obj " << objss->GetBoneCount();
-	//animationslist.push_back(animation(path, objss));//加入动画进动画机
-	//animatorlist.push_back(new animatorC());
-	//animast = animatorlist.back();
-	//animast->gameobjct = objss;
-	//animast->addanimation(animationslist.back());
-	//addtestAnimatorController(objss, new testAnimatorCcontroller(animast));//创建动画控制器和动画机
+	DObjctadd(new model(PATH + "\\assets\\model\\45\\45.dae"));//添加45号模型
+	std::string path = PATH + "\\assets\\model\\45\\45.dae";
+	linknode->backDOBJECT->thisshader = shaderlist[0];
+	linknode->backDOBJECT->transform.Position = glm::vec3(0.0f, 0.0f, 0.0f);
+	linknode->backDOBJECT->transform.Rotate = glm::vec3(0.0f, 0.0f, 0.0f);
+	linknode->backDOBJECT->transform.Scale = glm::vec3(0.020f, 0.020f, 0.020f);
+	
+	objss = dynamic_cast<model*>(linknode->backDOBJECT);
+	//std::cout <<" obj " << objss->GetBoneCount();
+	animationslist.push_back(animation(path, objss));//加入动画进动画机
+	animatorlist.push_back(new animatorC());
+	animast = animatorlist.back();
+	animast->gameobjct = objss;
+	animast->addanimation(animationslist.back());
+	addtestAnimatorController(objss, new testAnimatorCcontroller(animast));//创建动画控制器和动画机
 	
 	//std::cout << "name" << animationslist.back().name;
 

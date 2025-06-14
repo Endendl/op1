@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="mounting">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAgAAAAAAAAAAAAAEACAAAAAAAAAEAAA=</HashCode>
+      <FileName>mounting.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CapsuleCollision">
+    <Position X="10.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAQAAAAFAAQBAAAAAAIAAAEAQA=</HashCode>
+      <FileName>CapsuleCollision.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="collision">
+    <Position X="7.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgEgAAAAAAAABgAAAAQAAAAAACABAAAAAAAAAAEAAA=</HashCode>
+      <FileName>collision.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CubeCollision">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAQAQAAAAAAAABAAAAABgAQAEAAA=</HashCode>
+      <FileName>CubeCollision.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SphereCollision">
+    <Position X="10.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgIAAAQAAAAAAAABAAAAAAAAAAEAQA=</HashCode>
+      <FileName>SphereCollision.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

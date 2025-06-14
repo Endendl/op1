@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="mounting">
+    <Position X="6.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAgAAAAAAAAAAAAAEACAAAAAAAAAEAAA=</HashCode>
+      <FileName>mounting.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="animator">
+    <Position X="9" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BBAAEAkQAABAAgAIAAgAQAAQAAIgAAAABAAAAAAEABA=</HashCode>
+      <FileName>animator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="animatorC">
+    <Position X="12" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAgAAAAAAgAIAAAAAAAAQAAAAAAQAAAAAAAEAAA=</HashCode>
+      <FileName>animatorC.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimatorController">
+    <Position X="6.25" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BAAAIAAAAAAAAAAAAAAAQAAAAACAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>AnimatorController.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="testAnimatorCcontroller">
+    <Position X="11.75" Y="8.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>testAnimatorController.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
